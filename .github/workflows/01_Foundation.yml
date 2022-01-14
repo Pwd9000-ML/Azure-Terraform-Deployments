@@ -41,7 +41,7 @@ jobs:
 
       - name: Terraform Format
         id: fmt
-        run: terraform fmt -check
+        run: terraform fmt --check
 
       - name: Terraform Init
         id: init
@@ -53,11 +53,11 @@ jobs:
         #  RESOURCE_GROUP: ${{ secrets.RESOURCE_GROUP }}
         #  STORAGE_ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
         #  CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
-        run: terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="resource_group_name=$RESOURCE_GROUP" -backend-config="key=$TF_STATE_NAME"
+        run: terraform init --backend-config="storage_account_name=$STORAGE_ACCOUNT" --backend-config="container_name=$CONTAINER_NAME" --backend-config="resource_group_name=$RESOURCE_GROUP" --backend-config="key=$TF_STATE_NAME"
       
       - name: Terraform Validate
         id: validate
-        run: terraform validate -no-color
+        run: terraform validate --no-color
 
       - name: Terraform Plan
         id: plan
