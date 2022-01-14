@@ -8,7 +8,7 @@ on:
   pull_request:
 
 jobs:
-  01_foundation_plan:
+  build-plan:
     name: "01_Foundation_Plan"
     runs-on: ubuntu-latest
 
