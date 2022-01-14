@@ -57,7 +57,7 @@ jobs:
       
       - name: Terraform Validate
         id: validate
-        run: terraform validate --no-color
+        run: terraform validate
 
       - name: Terraform Plan
         id: plan
@@ -67,7 +67,7 @@ jobs:
         #  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
         #  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
         if: github.event_name == 'pull_request'
-        run: terraform plan --var-file=./config.tf.tfvars --out=./plan.tfplan -no-color
+        run: terraform plan --var-file=./config.tf.tfvars --out=./plan.tfplan
         continue-on-error: true
 
       - name: add-plan-comment
