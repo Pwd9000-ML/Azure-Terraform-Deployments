@@ -94,7 +94,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: 01_Foundation
-          path: plan.tfplan
+          path: 01_Foundation/plan.tfplan
           retention-days: 5
 
  #     - name: Terraform Apply
