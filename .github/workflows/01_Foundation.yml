@@ -45,14 +45,6 @@ jobs:
 
       - name: Terraform Init
         id: init
-        #env:
-        #  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-        #  ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-        #  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-        #  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-        #  RESOURCE_GROUP: ${{ secrets.RESOURCE_GROUP }}
-        #  STORAGE_ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
-        #  CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
         run: terraform init --backend-config="storage_account_name=$STORAGE_ACCOUNT" --backend-config="container_name=$CONTAINER_NAME" --backend-config="resource_group_name=$RESOURCE_GROUP" --backend-config="key=$TF_STATE_NAME"
       
       - name: Terraform Validate
@@ -61,19 +53,14 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        #env:
-        #  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-        #  ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-        #  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-        #  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-        if: github.event_name == 'pull_request'
+        #if: github.event_name == 'pull_request'
         run: terraform plan --var-file=./config.tf.tfvars --out=./plan.tfplan
         continue-on-error: true
 
       - name: add-plan-comment
         id: comment
         uses: actions/github-script@v3
-        if: github.event_name == 'pull_request'
+        #if: github.event_name == 'pull_request'
         env:
           PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
         with:
