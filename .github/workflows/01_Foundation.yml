@@ -1,22 +1,22 @@
-name: "Terraform"
+name: "01_Foundation"
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - master
+  #push:
+  #  branches:
+  #    - master
   pull_request:
 
 jobs:
-  terraform:
-    name: "Terraform"
+  01_foundation_plan:
+    name: "01_Foundation_Plan"
     runs-on: ubuntu-latest
 
     # Set the working directory to main for the config files
     defaults:
       run:
         shell: bash
-        working-directory: ./master/01_Foundation
+        working-directory: 01_Foundation
 
     env:
       TF_VERSION: latest
