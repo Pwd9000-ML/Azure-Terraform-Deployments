@@ -1,6 +1,7 @@
 name: "Terraform"
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
@@ -27,7 +28,7 @@ jobs:
       ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
       RESOURCE_GROUP: ${{ secrets.RESOURCE_GROUP }}
       STORAGE_ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
-      CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
+      CONTAINER_NAME: ghdeploytfstate
 
     steps:
       - name: Checkout
@@ -66,7 +67,7 @@ jobs:
         #  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
         #  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
         if: github.event_name == 'pull_request'
-        run: terraform plan --var-file=./config.tf.tfvars --out=plan.tfplan -no-color
+        run: terraform plan --var-file=./config.tf.tfvars --out=./plan.tfplan -no-color
         continue-on-error: true
 
       - name: add-plan-comment
@@ -106,7 +107,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: 01_Foundation
-          path: plan.tfplan
+          path: ./plan.tfplan
           retention-days: 5
 
  #     - name: Terraform Apply
