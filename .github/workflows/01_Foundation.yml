@@ -18,18 +18,18 @@ jobs:
     name: "01_Foundation_Plan"
     environment: Development
 
-    env:
-      TF_VERSION: latest                   #Optional
-      TF_STATE_NAME: 01_Foundation         #Required
-      TF_CONTAINER_NAME: ghdeploytfstate   #Required
-      ENVIRONMENT: dev                     #Required
+#    env:
+#      TF_VERSION: latest                   #Optional
+#      TF_STATE_NAME: 01_Foundation         #Required
+#      TF_CONTAINER_NAME: ghdeploytfstate   #Required
+#      ENVIRONMENT: dev                     #Required
 
     uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/tf_plan.yml@master
     with:
-      tf_version: ${{ env.TF_VERSION }}               #Optional
-      tf_state_name: ${{ env.TF_STATE_NAME }}         #Required
-      tf_container_name: ${{ env.TF_CONTAINER_NAME }} #Required
-      environment: ${{ env.ENVIRONMENT }}             #Required
+      tf_version: latest                 #Optional
+      tf_state_name: 01_Foundation       #Required
+      tf_container_name: ghdeploytfstate #Required
+      environment: dev                   #Required
     secrets:
       arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
       arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}
