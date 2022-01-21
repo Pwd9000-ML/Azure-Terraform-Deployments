@@ -8,7 +8,7 @@ variable "location" {
   description = "The location/region where Azure resource will be created."
   default     = "uksouth"
 }
- 
+
 #variable "environment" {
 #  type       = string
 #  description = "Specifies environment to use in naming"
