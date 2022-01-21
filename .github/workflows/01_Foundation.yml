@@ -13,11 +13,11 @@ defaults:
     shell: bash
     working-directory: 01_Foundation
 
-env:
-  TF_VERSION: latest                   #Optional
-  TF_STATE_NAME: 01_Foundation         #Required
-  TF_CONTAINER_NAME: ghdeploytfstate   #Required
-  ENVIRONMENT: Development             #Required
+  env:
+    TF_VERSION: latest                   #Optional
+    TF_STATE_NAME: 01_Foundation         #Required
+    TF_CONTAINER_NAME: ghdeploytfstate   #Required
+    ENVIRONMENT: Development             #Required
 
 jobs:
   build-plan:
