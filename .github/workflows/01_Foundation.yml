@@ -15,8 +15,8 @@ defaults:
 
 jobs:
   build-plan:
-    name: "01_Foundation_Plan"
-    environment: Development
+   # name: "01_Foundation_Plan"
+   # environment: Development
 
 #    env:
 #      TF_VERSION: latest                   #Optional
