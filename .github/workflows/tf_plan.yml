@@ -4,10 +4,9 @@ on:
   workflow_call:
     inputs:
       path:
-        description: 'Specifies the path of the root terraform module. Default="."'
-        required: false
+        description: 'Specifies the path of the root terraform module.'
+        required: true
         type: string
-        #default: "."
       tf_version:
         description: 'Specifies version of Terraform to use. Default=latest.'
         required: false
@@ -134,7 +133,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: "${{ inputs.tf_key }}"
-          path: "plan.tfplan"
+          path: "${{ inputs.path }}/plan.tfplan"
           retention-days: 5
 
  #     - name: Terraform Apply
