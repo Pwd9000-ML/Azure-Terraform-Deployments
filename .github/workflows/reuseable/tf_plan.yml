@@ -3,12 +3,17 @@ name: "Build_TF_Plan"
 on:
   workflow_call:
     inputs:
+      path:
+        description: 'Specifies the path of the root terraform module. Default="."'
+        required: false
+        type: string
+        default: "."
       tf_version:
         description: 'Specifies version of Terraform to use. Default=latest.'
         required: false
         type: string
         default: latest
-      tf_state_name:
+      tf_key:
         description: 'Specifies the Terraform state file name for this plan.'
         required: true
         type: string
@@ -45,21 +50,25 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     env:
-      TF_VERSION: ${{ inputs.tf_version }}               
-      TF_STATE_NAME: ${{ inputs.tf_state_name }}.tfstate 
-      CONTAINER_NAME: ${{ inputs.tf_container_name }} 
       STORAGE_ACCOUNT: ${{ secrets.storage_account }}
+      CONTAINER_NAME: ${{ inputs.tf_container_name }}
       RESOURCE_GROUP: ${{ secrets.resource_group }}
+      TF_KEY: ${{ inputs.tf_key }}.tfstate
+
+
+
       #NAMING_ENV: ${{ if  }}             #Required   
    
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          path: "${{ inputs.path }}"
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: "${{ env.TF_VERSION }}"
+          terraform_version: "${{ inputs.tf_version }}"
 
       - name: Terraform Format
         id: fmt
@@ -67,7 +76,7 @@ jobs:
 
       - name: Terraform Init
         id: init
-        run: terraform init --backend-config="storage_account_name=$STORAGE_ACCOUNT" --backend-config="container_name=$CONTAINER_NAME" --backend-config="resource_group_name=$RESOURCE_GROUP" --backend-config="key=$TF_STATE_NAME"
+        run: terraform init --backend-config="storage_account_name=$STORAGE_ACCOUNT" --backend-config="container_name=$CONTAINER_NAME" --backend-config="resource_group_name=$RESOURCE_GROUP" --backend-config="key=$TF_KEY"
       
       - name: Terraform Validate
         id: validate
@@ -115,8 +124,8 @@ jobs:
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v2
         with:
-          name: "${{ inputs.tf_state_name  }}"
-          path: "${{ inputs.tf_state_name  }}/plan.tfplan"
+          name: "${{ inputs.tf_key }}"
+          path: "plan.tfplan"
           retention-days: 5
 
  #     - name: Terraform Apply

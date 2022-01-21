@@ -11,14 +11,15 @@ on:
 defaults:
   run:
     shell: bash
-    working-directory: 01_Foundation
+    #working-directory: 01_Foundation
 
 jobs:
   Build_01_Foundation:
-    uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/tf_plan.yml@master
+    uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/reusable/tf_plan.yml@master
     with:
+      path: 01_Foundation                #Optional
       tf_version: latest                 #Optional
-      tf_state_name: 01_Foundation       #Required
+      tf_key: foundation                 #Required
       tf_container_name: ghdeploytfstate #Required
       environment: Development           #Required
     secrets:
