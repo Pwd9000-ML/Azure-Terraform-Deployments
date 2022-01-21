@@ -51,7 +51,7 @@ jobs:
     environment: ${{ inputs.environment }}
     defaults:
       run:
-        working-directory: $GITHUB_WORKSPACE/${{ inputs.path }}
+        working-directory: ${{ inputs.path }}
     env:
       STORAGE_ACCOUNT: ${{ secrets.storage_account }}
       CONTAINER_NAME: ${{ inputs.tf_container_name }}
