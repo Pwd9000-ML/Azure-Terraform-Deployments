@@ -43,7 +43,7 @@ on:
 jobs:
   build-plan:
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment }}
+    #environment: ${{ inputs.environment }}
     env:
       TF_VERSION: ${{ inputs.tf_version }}               
       TF_STATE_NAME: ${{ inputs.tf_state_name }}.tfstate 

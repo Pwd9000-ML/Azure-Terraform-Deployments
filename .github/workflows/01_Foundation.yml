@@ -14,7 +14,7 @@ defaults:
     working-directory: 01_Foundation
 
 jobs:
-  01FoundationPlan:
+  01_Foundation_Plan:
     uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/tf_plan.yml@master
     with:
       tf_version: latest                 #Optional
@@ -28,5 +28,3 @@ jobs:
       arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}
       resource_group: ${{ secrets.RESOURCE_GROUP }}
       storage_account: ${{ secrets.STORAGE_ACCOUNT }}
-
-
