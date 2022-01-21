@@ -49,9 +49,9 @@ jobs:
   build-plan:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
-    defaults:
-      run:
-        working-directory: ${{ inputs.path }}
+   # defaults:
+   #   run:
+   #     working-directory: ${{ inputs.path }}
     env:
       STORAGE_ACCOUNT: ${{ secrets.storage_account }}
       CONTAINER_NAME: ${{ inputs.tf_container_name }}
@@ -66,12 +66,13 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
-       # with:
+        #with:
         #  terraform_version: "${{ inputs.tf_version }}"
 
       - name: Terraform Format
         id: fmt
         run: terraform fmt --check
+          working-directory: ${{ inputs.path }}
 
       - name: Terraform Init
         id: init
