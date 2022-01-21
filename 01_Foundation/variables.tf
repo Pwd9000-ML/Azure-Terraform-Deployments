@@ -9,11 +9,11 @@ variable "location" {
   default     = "uksouth"
 }
  
-variable "environment" {
-  type       = string
-  description = "Specifies environment to use in naming"
-  default     = "dev"
-}
+#variable "environment" {
+#  type       = string
+#  description = "Specifies environment to use in naming"
+#  default     = "dev"
+#}
 
 variable "tags" {
   type        = map(any)
