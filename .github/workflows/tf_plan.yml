@@ -49,21 +49,20 @@ jobs:
   build-plan:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
+    defaults:
+      run:
+        working-directory: ${{ inputs.path }}
     env:
       STORAGE_ACCOUNT: ${{ secrets.storage_account }}
       CONTAINER_NAME: ${{ inputs.tf_container_name }}
       RESOURCE_GROUP: ${{ secrets.resource_group }}
       TF_KEY: ${{ inputs.tf_key }}.tfstate
-
-
-
-      #NAMING_ENV: ${{ if  }}             #Required   
-   
+  
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          path: "${{ inputs.path }}"
+          path: ${{ inputs.path }}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
