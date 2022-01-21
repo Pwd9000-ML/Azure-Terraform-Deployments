@@ -71,8 +71,7 @@ jobs:
 
       - name: Terraform Format
         id: fmt
-        run: terraform fmt --check
-          working-directory: ${{ inputs.path }}
+        run: terraform --chdir=${{ inputs.path }}  fmt --check
 
       - name: Terraform Init
         id: init
