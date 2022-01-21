@@ -49,9 +49,9 @@ jobs:
   build-plan:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
-    defaults:
-      run:
-        shell: bash
+    #defaults:
+    #  run:
+    #    shell: bash
         #working-directory: ${{ inputs.path }}
     env:
       STORAGE_ACCOUNT: ${{ secrets.storage_account }}
@@ -67,8 +67,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        #with:
-        #  path: ${{ inputs.path }}
+        with:
+          path: ${{ inputs.path }}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1.3.2
@@ -78,24 +78,24 @@ jobs:
       - name: Terraform Format
         id: fmt
         run: terraform fmt --check
-        working-directory: ${{ inputs.path }}
+        #working-directory: ${{ inputs.path }}
 
       - name: Terraform Init
         id: init
         run: terraform init --backend-config="storage_account_name=$STORAGE_ACCOUNT" --backend-config="container_name=$CONTAINER_NAME" --backend-config="resource_group_name=$RESOURCE_GROUP" --backend-config="key=$TF_KEY"
-        working-directory: ${{ inputs.path }}
+        #working-directory: ${{ inputs.path }}
       
       - name: Terraform Validate
         id: validate
         run: terraform validate
-        working-directory: ${{ inputs.path }}
+        #working-directory: ${{ inputs.path }}
 
       - name: Terraform Plan
         id: plan
         #if: github.event_name == 'pull_request'
         run: terraform plan --var-file=config.tf.tfvars --out=plan.tfplan
         continue-on-error: true
-        working-directory: ${{ inputs.path }}
+        #working-directory: ${{ inputs.path }}
 
 #      - name: add-plan-comment
 #        id: comment

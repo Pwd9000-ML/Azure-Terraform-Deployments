@@ -8,9 +8,9 @@ on:
  # pull_request:
 
 # Set the working directory to main for the config files
-#defaults:
-#  run:
-#    shell: bash
+defaults:
+  run:
+    shell: bash
 #    working-directory: 01_Foundation
 
 jobs:
