@@ -51,7 +51,7 @@ jobs:
     environment: ${{ inputs.environment }}
     defaults:
       run:
-        working-directory: ${{ inputs.path }}
+        working-directory: ./${{ inputs.path }}
     env:
       STORAGE_ACCOUNT: ${{ secrets.storage_account }}
       CONTAINER_NAME: ${{ inputs.tf_container_name }}
@@ -61,6 +61,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          path: ${{ inputs.path }}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
