@@ -14,7 +14,7 @@ defaults:
     working-directory: 01_Foundation
 
 jobs:
-  01_Foundation_Plan:
+  Build_01_Foundation:
     uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/tf_plan.yml@master
     with:
       tf_version: latest                 #Optional
