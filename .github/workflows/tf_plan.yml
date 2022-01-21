@@ -7,7 +7,7 @@ on:
         description: 'Specifies the path of the root terraform module. Default="."'
         required: false
         type: string
-        default: "."
+        #default: "."
       tf_version:
         description: 'Specifies version of Terraform to use. Default=latest.'
         required: false
@@ -67,8 +67,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          path: ${{ inputs.path }}
+        #with:
+        #  path: ${{ inputs.path }}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1.3.2
@@ -95,6 +95,7 @@ jobs:
         #if: github.event_name == 'pull_request'
         run: terraform plan --var-file=config.tf.tfvars --out=plan.tfplan
         continue-on-error: true
+        working-directory: ${{ inputs.path }}
 
 #      - name: add-plan-comment
 #        id: comment
