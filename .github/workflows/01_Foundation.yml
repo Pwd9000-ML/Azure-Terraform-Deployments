@@ -15,7 +15,7 @@ defaults:
 
 jobs:
   Build_01_Foundation:
-    uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/reusable/tf_plan.yml@master
+    uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/tf_plan.yml@master
     with:
       path: 01_Foundation                #Optional
       tf_version: latest                 #Optional
