@@ -13,15 +13,17 @@ defaults:
     shell: bash
     working-directory: 01_Foundation
 
-  env:
-    TF_VERSION: latest                   #Optional
-    TF_STATE_NAME: 01_Foundation         #Required
-    TF_CONTAINER_NAME: ghdeploytfstate   #Required
-    ENVIRONMENT: Development             #Required
-
 jobs:
   build-plan:
     name: "01_Foundation_Plan"
+    environment: Development
+
+    env:
+      TF_VERSION: latest                   #Optional
+      TF_STATE_NAME: 01_Foundation         #Required
+      TF_CONTAINER_NAME: ghdeploytfstate   #Required
+      ENVIRONMENT: dev                     #Required
+
     uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/tf_plan.yml@master
     with:
       tf_version: ${{ env.TF_VERSION }}               #Optional
