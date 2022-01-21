@@ -78,17 +78,17 @@ jobs:
       - name: Terraform Format
         id: fmt
         run: terraform fmt --check
-          working-directory: ${{ inputs.path }}
+        working-directory: ${{ inputs.path }}
 
       - name: Terraform Init
         id: init
         run: terraform init --backend-config="storage_account_name=$STORAGE_ACCOUNT" --backend-config="container_name=$CONTAINER_NAME" --backend-config="resource_group_name=$RESOURCE_GROUP" --backend-config="key=$TF_KEY"
-          working-directory: ${{ inputs.path }}
+        working-directory: ${{ inputs.path }}
       
       - name: Terraform Validate
         id: validate
         run: terraform validate
-          working-directory: ${{ inputs.path }}
+        working-directory: ${{ inputs.path }}
 
       - name: Terraform Plan
         id: plan
