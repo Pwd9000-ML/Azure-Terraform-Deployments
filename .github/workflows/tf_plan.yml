@@ -43,6 +43,15 @@ on:
 jobs:
   build-plan:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    env:
+      TF_VERSION: ${{ inputs.tf_version }}               
+      TF_STATE_NAME: ${{ inputs.tf_state_name }}.tfstate 
+      CONTAINER_NAME: ${{ inputs.tf_container_name }} 
+      STORAGE_ACCOUNT: ${{ secrets.storage_account }}
+      RESOURCE_GROUP: ${{ secrets.resource_group }}
+      #NAMING_ENV: ${{ if  }}             #Required   
+   
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -50,7 +59,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: "${{ inputs.TF_VERSION }}"
+          terraform_version: "${{ env.TF_VERSION }}"
 
       - name: Terraform Format
         id: fmt
@@ -58,7 +67,7 @@ jobs:
 
       - name: Terraform Init
         id: init
-        run: terraform init --backend-config="storage_account_name=$STORAGE_ACCOUNT" --backend-config="container_name=$CONTAINER_NAME" --backend-config="resource_group_name=$RESOURCE_GROUP" --backend-config="key=$TF_STATE_NAME.tfstate"
+        run: terraform init --backend-config="storage_account_name=$STORAGE_ACCOUNT" --backend-config="container_name=$CONTAINER_NAME" --backend-config="resource_group_name=$RESOURCE_GROUP" --backend-config="key=$TF_STATE_NAME"
       
       - name: Terraform Validate
         id: validate
