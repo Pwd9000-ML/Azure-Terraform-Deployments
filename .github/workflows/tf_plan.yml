@@ -49,21 +49,26 @@ jobs:
   build-plan:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
-    defaults:
-      run:
-        shell: bash
-        working-directory: ${{ inputs.path }}
+    #defaults:
+    #  run:
+    #    shell: bash
+    #    working-directory: ${{ inputs.path }}
     env:
       STORAGE_ACCOUNT: ${{ secrets.storage_account }}
       CONTAINER_NAME: ${{ inputs.tf_container_name }}
       RESOURCE_GROUP: ${{ secrets.resource_group }}
       TF_KEY: ${{ inputs.tf_key }}.tfstate
+      ###AZURE Client details###
+      ARM_CLIENT_ID: ${{ secrets.arm_client_id }}
+      ARM_CLIENT_SECRET: ${{ secrets.arm_client_secret }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.arm_subscription_id }}
+      ARM_TENANT_ID: ${{ secrets.arm_tenant_id }}
   
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        #with:
-        #  path: ${{ inputs.path }}
+        with:
+          path: ${{ inputs.path }}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1.3.2
