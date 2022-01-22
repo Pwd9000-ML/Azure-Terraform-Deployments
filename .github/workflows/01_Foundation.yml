@@ -16,11 +16,11 @@ jobs:
     #if: github.ref == 'refs/heads/master' && github.event_name == 'pull_request'
     uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_plan.yml@master
     with:
-      path: ${{ env.path }}               ## Path to terraform root module (Required)
+      path: "${{ env.path }}"               ## Path to terraform root module (Required)
       tf_version: latest                  ## Terraform version. Default=latest (Optional)
-      az_resource_group: ${{ env.az_rg }} ## AZ backend - AZURE Resource Group hosting terraform backend storage acc (Required)
-      az_storage_acc: ${{ env.az_sa }}    ## AZ backend - AZURE terraform backend storage acc (Required)
-      az_container_name: ${{ env.az_cn }} ## AZ backend - AZURE storage container hosting state files (Required)
+      az_resource_group: "${{ env.az_rg }}" ## AZ backend - AZURE Resource Group hosting terraform backend storage acc (Required)
+      az_storage_acc: "${{ env.az_sa }}"    ## AZ backend - AZURE terraform backend storage acc (Required)
+      az_container_name: "${{ env.az_cn }}" ## AZ backend - AZURE storage container hosting state files (Required)
       tf_key: foundation-dev              ## AZ backend - Specifies name that will be given to terraform state file (Required)
       tf_vars_file: config-dev.tfvars     ## Terraform TFVARS (Required)
     secrets:
