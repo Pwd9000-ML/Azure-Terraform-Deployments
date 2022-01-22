@@ -9,7 +9,7 @@ This repository can be reused by anyone to:
 - Learn about multi-stage deployments and approvals in GitHub.
 - Utilize in your own organization to build AZURE Infrastructure at scale.
 
-Showcasing how to use GitHub reusable workflows and GitHub environments to build enterprise scale multi environment infrastructure deployments in Azure using a non-monolithic approach, to construct and simplify complex terraform deployments into simpler manageable workteams and reducing duplicate deployment workflows by utilizing reusable GitHub workflows.
+Showcasing how to use GitHub reusable workflows and GitHub environments to build enterprise scale multi environment infrastructure deployments in Azure using a non-monolithic approach, to construct and simplify complex terraform deployments into simpler manageable work streams and reduce duplicate workflow code by utilizing reusable GitHub workflows.
 
 ![image.png](https://raw.githubusercontent.com/Pwd9000-ML/Azure-Terraform-Deployments/master/assets/main.png)
 
