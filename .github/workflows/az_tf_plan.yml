@@ -104,7 +104,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: "${{ inputs.tf_key }}"
-          path: "${{ inputs.path }}/"
+          path: "${{ inputs.path }}"
           retention-days: 5
 
  #     - name: Terraform Apply
