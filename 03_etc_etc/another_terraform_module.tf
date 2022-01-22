@@ -14,4 +14,4 @@ provider "azurerm" {
 }
 
 ### Another awesome Terraform ROOT module ###
-### Let's take a break and play some Gwent ###
+### Let's take a break and play a round of Gwent ###
