@@ -4,7 +4,7 @@ Repo used to deploy Azure Resources using Terraform and GitHub Actions.
 
 This repository showcases how to use GitHub reusable workflows and GitHub environments to build infrastructure in Azure using a non-monolithic approach, to construct and simplify complex terraform deployments into simpler manageable tasks and workflows.
 
-![image.png](.assets/main.png)
+![image.png](https://raw.githubusercontent.com/Pwd9000-ML/Azure-Terraform-Deployments/master/assets/main.png)
 
 Each workflow can be independently deployed e.g.
 
