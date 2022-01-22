@@ -26,6 +26,7 @@ jobs:
       arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}             ## ARM Tenant ID
 
   Deploy_Plan_Dev:
+  needs: Build_Plan_Dev
     uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_apply.yml@master
     with:
       path: 01_Foundation                ## Path to terraform root module (Required)
@@ -43,7 +44,6 @@ jobs:
       arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}             ## ARM Tenant ID
 
   Build_Plan_Uat:
-    needs: Build_Plan_Dev
     uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_plan.yml@master
     with:
       path: 01_Foundation
@@ -61,7 +61,6 @@ jobs:
       arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}
 
   Build_Plan_Prod:
-    needs: Build_Plan_Uat
     uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_plan.yml@master
     with:
       path: 01_Foundation
