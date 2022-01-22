@@ -101,7 +101,7 @@ jobs:
         run: exit 1
 
       - name: Compress TF Plan artifact
-        run: zip ${{ inputs.tf_key }}.zip ./* -r
+        run: zip -r ${{ inputs.tf_key }}.zip ./* ./.terraform
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
