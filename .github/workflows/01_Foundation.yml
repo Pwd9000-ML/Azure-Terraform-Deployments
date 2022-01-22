@@ -2,13 +2,12 @@ name: "01_Foundation"
 
 on:
   workflow_dispatch:
-  #push:
-  #  branches:
-  #    - master
-  pull_request:
+  pull_request::
+    branches:
+      - master
 
 jobs:
-  Build_Plan_Dev:
+  Plan_Dev:
     uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_plan.yml@master
     with:
       path: 01_Foundation                ## Path to terraform root module (Required)
@@ -17,7 +16,6 @@ jobs:
       az_storage_acc: tfcorebackendsa    ## AZ backend - AZURE terraform backend storage acc (Required)
       az_container_name: ghdeploytfstate ## AZ backend - AZURE storage container hosting state files (Required)
       tf_key: foundation-dev             ## AZ backend - Specifies name that will be given to terraform state file (Required)
-      #gh_environment: Development        ## GH Environment. Default=null - (Optional)
       tf_vars_file: config-dev.tfvars    ## Terraform TFVARS (Required)
     secrets:
       arm_client_id: ${{ secrets.ARM_CLIENT_ID }}             ## ARM Client ID 
@@ -25,8 +23,8 @@ jobs:
       arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }} ## ARM Subscription ID
       arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}             ## ARM Tenant ID
 
-  Deploy_Plan_Dev:
-    needs: Build_Plan_Dev
+  Deploy_Dev:
+    needs: Plan_Dev
     uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_apply.yml@master
     with:
       path: 01_Foundation                ## Path to terraform root module (Required)
@@ -43,16 +41,14 @@ jobs:
       arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }} ## ARM Subscription ID
       arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}             ## ARM Tenant ID
 
-  Build_Plan_Uat:
+  Plan_Uat:
     uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_plan.yml@master
     with:
       path: 01_Foundation
-      tf_version: latest
       az_resource_group: TF-Core-Rg
       az_storage_acc: tfcorebackendsa
       az_container_name: ghdeploytfstate
       tf_key: foundation-uat
-      #gh_environment: UserAcceptanceTesting
       tf_vars_file: config-uat.tfvars
     secrets:
       arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
@@ -60,7 +56,24 @@ jobs:
       arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
       arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}
 
-  Build_Plan_Prod:
+  Deploy_Uat:
+    needs: [Plan_Uat, Deploy_Dev]
+    uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_apply.yml@master
+    with:
+      path: 01_Foundation
+      az_resource_group: TF-Core-Rg
+      az_storage_acc: tfcorebackendsa
+      az_container_name: ghdeploytfstate
+      tf_key: foundation-uat
+      gh_environment: UserAcceptanceTesting
+      tf_vars_file: config-uat.tfvars
+    secrets:
+      arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
+      arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}
+      arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}
+
+  Plan_Prod:
     uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_plan.yml@master
     with:
       path: 01_Foundation
@@ -69,7 +82,23 @@ jobs:
       az_storage_acc: tfcorebackendsa
       az_container_name: ghdeploytfstate
       tf_key: foundation-prod
-      #gh_environment: Production
+      tf_vars_file: config-prod.tfvars
+    secrets:
+      arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
+      arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}
+      arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}
+
+  Deploy_Uat:
+    needs: [Plan_Prod, Deploy_Uat]
+    uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_apply.yml@master
+    with:
+      path: 01_Foundation
+      az_resource_group: TF-Core-Rg
+      az_storage_acc: tfcorebackendsa
+      az_container_name: ghdeploytfstate
+      tf_key: foundation-prod
+      gh_environment: Production
       tf_vars_file: config-prod.tfvars
     secrets:
       arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
