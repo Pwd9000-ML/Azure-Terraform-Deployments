@@ -100,11 +100,14 @@ jobs:
         if: steps.plan.outcome == 'failure'
         run: exit 1
 
-      - name: 'Upload Artifact'
+      - name: Compress artifact
+        run: zip ${{ inputs.tf_key }}.zip ./* -r
+
+      - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
           name: "${{ inputs.tf_key }}"
-          path: "${{ inputs.path }}"
+          path: "${{ inputs.path }}/${{ inputs.tf_key }}.zip"
           retention-days: 5
 
  #     - name: Terraform Apply
