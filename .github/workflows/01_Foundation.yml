@@ -9,7 +9,7 @@ on:
 
 jobs:
   Build_Plan:
-    uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/tf_plan.yml@master
+    uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_plan.yml@master
     with:
       path: 01_Foundation                ## Path to terraform root module (Required)
       tf_version: latest                 ## Terraform version. Default=latest (Optional)
