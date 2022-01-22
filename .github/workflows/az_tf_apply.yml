@@ -1,3 +1,4 @@
+### Reusable workflow to download terraform artifact built by `az_tf_plan` and apply the artifact/plan ###
 name: "Apply_TF_Plan"
 on:
   workflow_call:
@@ -7,7 +8,7 @@ on:
         required: true
         type: string
       tf_version:
-        description: 'Specifies version of Terraform to use. Default=latest.'
+        description: 'Specifies version of Terraform to use. e.g: 1.1.0 Default=latest.'
         required: false
         type: string
         default: latest

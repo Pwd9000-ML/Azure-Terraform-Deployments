@@ -1,3 +1,4 @@
+### Reusable workflow to plan terraform deployment, create artifact and upload to workspace artifacts for consumption ###
 name: "Build_TF_Plan"
 on:
   workflow_call:
@@ -7,7 +8,7 @@ on:
         required: true
         type: string
       tf_version:
-        description: 'Specifies version of Terraform to use. Default=latest.'
+        description: 'Specifies version of Terraform to use. e.g: 1.1.0 Default=latest.'
         required: false
         type: string
         default: latest
@@ -101,7 +102,7 @@ jobs:
         run: exit 1
 
       - name: Compress TF Plan artifact
-        run: zip -r ${{ inputs.tf_key }}.zip ./* #./.terraform
+        run: zip -r ${{ inputs.tf_key }}.zip ./*
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2

@@ -10,7 +10,7 @@ jobs:
     uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_plan.yml@master
     with:
       path: 02_Storage                   ## Path to terraform root module (Required)
-      tf_version: latest                 ## Terraform version. Default=latest (Optional)
+      tf_version: latest                 ## Terraform version e.g: 1.1.0 Default=latest (Optional)
       az_resource_group: TF-Core-Rg      ## AZ backend - AZURE Resource Group hosting terraform backend storage acc (Required)
       az_storage_acc: tfcorebackendsa    ## AZ backend - AZURE terraform backend storage acc (Required)
       az_container_name: ghdeploytfstate ## AZ backend - AZURE storage container hosting state files (Required)
@@ -27,7 +27,7 @@ jobs:
     uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_apply.yml@master
     with:
       path: 02_Storage                   ## Path to terraform root module (Required)
-      tf_version: latest                 ## Terraform version. Default=latest (Optional)
+      tf_version: latest                 ## Terraform version e.g: 1.1.0 Default=latest (Optional)
       az_resource_group: TF-Core-Rg      ## AZ backend - AZURE Resource Group hosting terraform backend storage acc (Required)
       az_storage_acc: tfcorebackendsa    ## AZ backend - AZURE terraform backend storage acc (Required)
       az_container_name: ghdeploytfstate ## AZ backend - AZURE storage container hosting state files (Required)
