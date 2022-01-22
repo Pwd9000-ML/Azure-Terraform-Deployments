@@ -5,24 +5,19 @@ on:
   pull_request:
     branches:
       - master
-env:
-  path: 01_Foundation
-  az_rg: TF-Core-Rg
-  az_sa: tfcorebackendsa
-  az_cn: ghdeploytfstate
 
 jobs:
   Plan_Dev:
     #if: github.ref == 'refs/heads/master' && github.event_name == 'pull_request'
     uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_plan.yml@master
     with:
-      path: "${{ env.path }}"               ## Path to terraform root module (Required)
-      tf_version: latest                  ## Terraform version. Default=latest (Optional)
-      az_resource_group: "${{ env.az_rg }}" ## AZ backend - AZURE Resource Group hosting terraform backend storage acc (Required)
-      az_storage_acc: "${{ env.az_sa }}"    ## AZ backend - AZURE terraform backend storage acc (Required)
-      az_container_name: "${{ env.az_cn }}" ## AZ backend - AZURE storage container hosting state files (Required)
-      tf_key: foundation-dev              ## AZ backend - Specifies name that will be given to terraform state file (Required)
-      tf_vars_file: config-dev.tfvars     ## Terraform TFVARS (Required)
+      path: 01_Foundation                ## Path to terraform root module (Required)
+      tf_version: latest                 ## Terraform version. Default=latest (Optional)
+      az_resource_group: TF-Core-Rg      ## AZ backend - AZURE Resource Group hosting terraform backend storage acc (Required)
+      az_storage_acc: tfcorebackendsa    ## AZ backend - AZURE terraform backend storage acc (Required)
+      az_container_name: ghdeploytfstate ## AZ backend - AZURE storage container hosting state files (Required)
+      tf_key: foundation-dev             ## AZ backend - Specifies name that will be given to terraform state file (Required)
+      tf_vars_file: config-dev.tfvars    ## Terraform TFVARS (Required)
     secrets:
       arm_client_id: ${{ secrets.ARM_CLIENT_ID }}             ## ARM Client ID 
       arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}     ## ARM Client Secret
@@ -33,14 +28,14 @@ jobs:
     needs: Plan_Dev
     uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_apply.yml@master
     with:
-      path: ${{ env.path }}               ## Path to terraform root module (Required)
-      tf_version: latest                  ## Terraform version. Default=latest (Optional)
-      az_resource_group: ${{ env.az_rg }} ## AZ backend - AZURE Resource Group hosting terraform backend storage acc (Required)
-      az_storage_acc: ${{ env.az_sa }}    ## AZ backend - AZURE terraform backend storage acc (Required)
-      az_container_name: ${{ env.az_cn }} ## AZ backend - AZURE storage container hosting state files (Required)
-      tf_key: foundation-dev              ## AZ backend - Specifies name that will be given to terraform state file (Required)
-      gh_environment: Development         ## GH Environment. Default=null - (Optional)
-      tf_vars_file: config-dev.tfvars     ## Terraform TFVARS (Required)
+      path: 01_Foundation                ## Path to terraform root module (Required)
+      tf_version: latest                 ## Terraform version. Default=latest (Optional)
+      az_resource_group: TF-Core-Rg      ## AZ backend - AZURE Resource Group hosting terraform backend storage acc (Required)
+      az_storage_acc: tfcorebackendsa    ## AZ backend - AZURE terraform backend storage acc (Required)
+      az_container_name: ghdeploytfstate ## AZ backend - AZURE storage container hosting state files (Required)
+      tf_key: foundation-dev             ## AZ backend - Specifies name that will be given to terraform state file (Required)
+      gh_environment: Development        ## GH Environment. Default=null - (Optional)
+      tf_vars_file: config-dev.tfvars    ## Terraform TFVARS (Required)
     secrets:
       arm_client_id: ${{ secrets.ARM_CLIENT_ID }}             ## ARM Client ID 
       arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}     ## ARM Client Secret
@@ -51,10 +46,10 @@ jobs:
     #if: github.ref == 'refs/heads/master' && github.event_name == 'pull_request'
     uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_plan.yml@master
     with:
-      path: ${{ env.path }}
-      az_resource_group: ${{ env.az_rg }}
-      az_storage_acc: ${{ env.az_sa }}
-      az_container_name: ${{ env.az_cn }}
+      path: 01_Foundation
+      az_resource_group: TF-Core-Rg
+      az_storage_acc: tfcorebackendsa
+      az_container_name: ghdeploytfstate
       tf_key: foundation-uat
       tf_vars_file: config-uat.tfvars
     secrets:
@@ -67,10 +62,10 @@ jobs:
     needs: [Plan_Uat, Deploy_Dev]
     uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_apply.yml@master
     with:
-      path: ${{ env.path }}
-      az_resource_group: ${{ env.az_rg }}
-      az_storage_acc: ${{ env.az_sa }}
-      az_container_name: ${{ env.az_cn }}
+      path: 01_Foundation
+      az_resource_group: TF-Core-Rg
+      az_storage_acc: tfcorebackendsa
+      az_container_name: ghdeploytfstate
       tf_key: foundation-uat
       gh_environment: UserAcceptanceTesting
       tf_vars_file: config-uat.tfvars
@@ -84,10 +79,11 @@ jobs:
     #if: github.ref == 'refs/heads/master' && github.event_name == 'pull_request'
     uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_plan.yml@master
     with:
-      path: ${{ env.path }}
-      az_resource_group: ${{ env.az_rg }}
-      az_storage_acc: ${{ env.az_sa }}
-      az_container_name: ${{ env.az_cn }}
+      path: 01_Foundation
+      tf_version: latest
+      az_resource_group: TF-Core-Rg
+      az_storage_acc: tfcorebackendsa
+      az_container_name: ghdeploytfstate
       tf_key: foundation-prod
       tf_vars_file: config-prod.tfvars
     secrets:
@@ -100,10 +96,10 @@ jobs:
     needs: [Plan_Prod, Deploy_Uat]
     uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_apply.yml@master
     with:
-      path: ${{ env.path }}
-      az_resource_group: ${{ env.az_rg }}
-      az_storage_acc: ${{ env.az_sa }}
-      az_container_name: ${{ env.az_cn }}
+      path: 01_Foundation
+      az_resource_group: TF-Core-Rg
+      az_storage_acc: tfcorebackendsa
+      az_container_name: ghdeploytfstate
       tf_key: foundation-prod
       gh_environment: Production
       tf_vars_file: config-prod.tfvars
