@@ -76,7 +76,7 @@ jobs:
         with:
           name: ${{ inputs.tf_key }}
 
-      - name: Uncompress TF Plan artifact
+      - name: Decompress TF Plan artifact
         run: unzip ${{ inputs.tf_key }}.zip
 
       - name: Setup Terraform
