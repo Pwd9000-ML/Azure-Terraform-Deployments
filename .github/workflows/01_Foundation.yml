@@ -17,7 +17,7 @@ jobs:
       az_storage_acc: tfcorebackendsa    ## AZ backend - AZURE terraform backend storage acc (Required)
       az_container_name: ghdeploytfstate ## AZ backend - AZURE storage container hosting state files (Required)
       tf_key: foundation                 ## AZ backend - Specifies name that will be given to terraform state file (Required)
-      #gh_environment: Development        ## GH Environment. Default=null - (Optional)
+      gh_environment: Development        ## GH Environment. Default=null - (Optional)
     secrets:
       arm_client_id: ${{ secrets.ARM_CLIENT_ID }}             ## ARM Client ID 
       arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}     ## ARM Client Secret
