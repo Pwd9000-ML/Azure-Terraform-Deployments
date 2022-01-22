@@ -78,7 +78,7 @@ jobs:
           path: "${{ inputs.path }}/${{ inputs.tf_key }}.zip"
 
       - name: Uncompress TF Plan artifact
-        run: unzip ${{ inputs.tf_key }}.zip
+        run: unzip ${{ inputs.path }}/${{ inputs.tf_key }}.zip
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1.3.2
