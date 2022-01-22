@@ -1,0 +1,112 @@
+name: "Deploy_TF_Plan"
+on:
+  workflow_call:
+    inputs:
+      path:
+        description: 'Specifies the path of the root terraform module.'
+        required: true
+        type: string
+      tf_version:
+        description: 'Specifies version of Terraform to use. Default=latest.'
+        required: false
+        type: string
+        default: latest
+      az_resource_group:
+        description: 'Specifies the Azure Resource Group where the backend storage account is hosted.'
+        required: true
+        type: string
+      az_storage_acc:
+        description: 'Specifies the Azure Storage Account where the backend state is hosted.'
+        required: true
+        type: string
+      az_container_name:
+        description: 'Specifies the Azure Storage account container where backend Terraform state is hosted.'
+        required: true
+        type: string
+      tf_key:
+        description: 'Specifies the Terraform state file name for this plan.'
+        required: true
+        type: string
+      gh_environment:
+        description: 'Specifies the GitHub deployment environment.'
+        required: false
+        type: string
+        default: null
+      tf_vars_file:
+        description: 'Specifies the Terraform TFVARS file.'
+        required: true
+        type: string
+    secrets:
+      arm_client_id:
+        description: 'Specifies the Azure ARM CLIENT ID.'
+        required: true
+      arm_client_secret:
+        description: 'Specifies the Azure ARM CLIENT SECRET.'
+        required: true
+      arm_subscription_id:
+        description: 'Specifies the Azure ARM SUBSCRIPTION ID.'
+        required: true
+      arm_tenant_id:
+        description: 'Specifies the Azure ARM TENANT ID.'
+        required: true
+
+jobs:
+  build-plan:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.gh_environment }}
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ inputs.path }}
+    env:
+      STORAGE_ACCOUNT: ${{ inputs.az_storage_acc }}
+      CONTAINER_NAME: ${{ inputs.az_container_name }}
+      RESOURCE_GROUP: ${{ inputs.az_resource_group }}
+      TF_KEY: ${{ inputs.tf_key }}.tfstate
+      TF_VARS: ${{ inputs.tf_vars_file }}
+      ###AZURE Client details###
+      ARM_CLIENT_ID: ${{ secrets.arm_client_id }}
+      ARM_CLIENT_SECRET: ${{ secrets.arm_client_secret }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.arm_subscription_id }}
+      ARM_TENANT_ID: ${{ secrets.arm_tenant_id }}
+  
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1.3.2
+        with:
+          terraform_version: ${{ inputs.tf_version }}
+
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt --check
+
+      - name: Terraform Init
+        id: init
+        run: terraform init --backend-config="storage_account_name=$STORAGE_ACCOUNT" --backend-config="container_name=$CONTAINER_NAME" --backend-config="resource_group_name=$RESOURCE_GROUP" --backend-config="key=$TF_KEY"
+      
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan --var-file=$TF_VARS --out=plan.tfplan
+        continue-on-error: true
+
+      - name: Terraform Plan Status
+        if: steps.plan.outcome == 'failure'
+        run: exit 1
+
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v2
+        with:
+          name: "${{ inputs.tf_key }}"
+          path: "${{ inputs.path }}/plan.tfplan"
+          retention-days: 5
+
+ #     - name: Terraform Apply
+ #       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+ #       run: terraform apply -auto-approve

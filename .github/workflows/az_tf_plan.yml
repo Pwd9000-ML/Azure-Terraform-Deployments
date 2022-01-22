@@ -1,5 +1,4 @@
 name: "Build_TF_Plan"
-
 on:
   workflow_call:
     inputs:
@@ -94,38 +93,8 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        if: github.event_name == 'pull_request'
         run: terraform plan --var-file=$TF_VARS --out=plan.tfplan
         continue-on-error: true
-
-      - name: add-plan-comment
-        id: comment
-        uses: actions/github-script@v3
-        if: github.event_name == 'pull_request'
-        env:
-          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-            #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
-            #### Terraform Validation 🤖${{ steps.validate.outputs.stdout }}
-            #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
-        
-            <details><summary>Show Plan</summary>
-            
-            \`\`\`${process.env.PLAN}\`\`\`
-            
-            </details>
-            
-            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
-              
-            github.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: output
-            })
 
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
@@ -135,7 +104,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: "${{ inputs.tf_key }}"
-          path: "${{ inputs.path }}/plan.tfplan"
+          path: "${{ inputs.path }}/"
           retention-days: 5
 
  #     - name: Terraform Apply
