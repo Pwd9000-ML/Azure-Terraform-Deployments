@@ -17,7 +17,7 @@ jobs:
       az_storage_acc: tfcorebackendsa    ## AZ backend - AZURE terraform backend storage acc (Required)
       az_container_name: ghdeploytfstate ## AZ backend - AZURE storage container hosting state files (Required)
       tf_key: foundation-dev             ## AZ backend - Specifies name that will be given to terraform state file (Required)
-      gh_environment: Development        ## GH Environment. Default=null - (Optional)
+      #gh_environment: Development        ## GH Environment. Default=null - (Optional)
       tf_vars_file: config-dev.tfvars    ## Terraform TFVARS (Required)
     secrets:
       arm_client_id: ${{ secrets.ARM_CLIENT_ID }}             ## ARM Client ID 
@@ -52,7 +52,7 @@ jobs:
       az_storage_acc: tfcorebackendsa
       az_container_name: ghdeploytfstate
       tf_key: foundation-uat
-      gh_environment: UserAcceptanceTesting
+      #gh_environment: UserAcceptanceTesting
       tf_vars_file: config-uat.tfvars
     secrets:
       arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
@@ -69,7 +69,7 @@ jobs:
       az_storage_acc: tfcorebackendsa
       az_container_name: ghdeploytfstate
       tf_key: foundation-prod
-      gh_environment: Production
+      #gh_environment: Production
       tf_vars_file: config-prod.tfvars
     secrets:
       arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
