@@ -50,7 +50,7 @@ on:
 jobs:
   build-plan:
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment }}
+    environment: ${{ inputs.gh_environment }}
     defaults:
       run:
         shell: bash
