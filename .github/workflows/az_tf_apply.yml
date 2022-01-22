@@ -1,4 +1,4 @@
-name: "Deploy_TF_Plan"
+name: "Apply_TF_Plan"
 on:
   workflow_call:
     inputs:
