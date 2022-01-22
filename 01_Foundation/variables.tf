@@ -9,11 +9,16 @@ variable "location" {
   default     = "uksouth"
 }
 
-#variable "environment" {
-#  type       = string
-#  description = "Specifies environment to use in naming"
-#  default     = "dev"
-#}
+variable "key_vault_name" {
+  type        = string
+  description = "Specifies a key vault name"
+}
+
+variable "use_rbac_mode" {
+  type        = bool
+  description = "Specifies to use rbac mode. (Optional)"
+  default     = null
+}
 
 variable "tags" {
   type        = map(any)
