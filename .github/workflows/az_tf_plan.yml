@@ -96,7 +96,7 @@ jobs:
       - name: Terraform Plan
         id: plan
         #if: github.event_name == 'pull_request'
-        run: terraform plan --var-file=$TF_VARS --out=plan.tfplan
+        run: terraform plan --var-file="$TF_VARS" --out=plan.tfplan
         continue-on-error: true
 
 #      - name: add-plan-comment
