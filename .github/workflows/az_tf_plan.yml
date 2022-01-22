@@ -12,18 +12,27 @@ on:
         required: false
         type: string
         default: latest
+      az_resource_group:
+        description: 'Specifies the Azure Resource Group where the backend storage account is hosted.'
+        required: true
+        type: string
+      az_storage_acc:
+        description: 'Specifies the Azure Storage Account where the backend state is hosted.'
+        required: true
+        type: string
+      az_container_name:
+        description: 'Specifies the Azure Storage account container where backend Terraform state is hosted.'
+        required: true
+        type: string
       tf_key:
         description: 'Specifies the Terraform state file name for this plan.'
         required: true
         type: string
-      tf_container_name:
-        description: 'Specifies the Azure Storage account container where backend Terraform state is hosted.'
-        required: true
+      gh_environment:
+        description: 'Specifies the GitHub deployment environment.'
+        required: false
         type: string
-      environment:
-        description: 'Specifies the deployment environment.'
-        required: true
-        type: string
+        default: null
     secrets:
       arm_client_id:
         description: 'Specifies the Azure ARM CLIENT ID.'
@@ -37,12 +46,6 @@ on:
       arm_tenant_id:
         description: 'Specifies the Azure ARM TENANT ID.'
         required: true
-      resource_group:
-        description: 'Specifies the Azure Resource Group where the backend storage account is hosted.'
-        required: true
-      storage_account:
-        description: 'Specifies the Azure Storage Account where the backend state is hosted.'
-        required: true
 
 jobs:
   build-plan:
@@ -53,9 +56,9 @@ jobs:
         shell: bash
         working-directory: ${{ inputs.path }}
     env:
-      STORAGE_ACCOUNT: ${{ secrets.storage_account }}
-      CONTAINER_NAME: ${{ inputs.tf_container_name }}
-      RESOURCE_GROUP: ${{ secrets.resource_group }}
+      STORAGE_ACCOUNT: ${{ inputs.az_storage_acc }}
+      CONTAINER_NAME: ${{ inputs.az_container_name }}
+      RESOURCE_GROUP: ${{ inputs.az_resource_group }}
       TF_KEY: ${{ inputs.tf_key }}.tfstate
       ###AZURE Client details###
       ARM_CLIENT_ID: ${{ secrets.arm_client_id }}
@@ -66,8 +69,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        #with:
-        #  path: ${{ inputs.path }}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1.3.2
@@ -77,24 +78,20 @@ jobs:
       - name: Terraform Format
         id: fmt
         run: terraform fmt --check
-        #working-directory: ${{ inputs.path }}
 
       - name: Terraform Init
         id: init
         run: terraform init --backend-config="storage_account_name=$STORAGE_ACCOUNT" --backend-config="container_name=$CONTAINER_NAME" --backend-config="resource_group_name=$RESOURCE_GROUP" --backend-config="key=$TF_KEY"
-        #working-directory: ${{ inputs.path }}
       
       - name: Terraform Validate
         id: validate
         run: terraform validate
-        #working-directory: ${{ inputs.path }}
 
       - name: Terraform Plan
         id: plan
         #if: github.event_name == 'pull_request'
         run: terraform plan --var-file=config.tf.tfvars --out=plan.tfplan
         continue-on-error: true
-        #working-directory: ${{ inputs.path }}
 
 #      - name: add-plan-comment
 #        id: comment
