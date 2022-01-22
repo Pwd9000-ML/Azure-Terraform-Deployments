@@ -25,22 +25,22 @@ jobs:
       arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }} ## ARM Subscription ID
       arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}             ## ARM Tenant ID
 
-  #Deploy_Plan_Dev:
-  #  uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_apply.yml@master
-  #  with:
-  #    path: 01_Foundation                ## Path to terraform root module (Required)
-  #    tf_version: latest                 ## Terraform version. Default=latest (Optional)
-  #    az_resource_group: TF-Core-Rg      ## AZ backend - AZURE Resource Group hosting terraform backend storage acc (Required)
-  #    az_storage_acc: tfcorebackendsa    ## AZ backend - AZURE terraform backend storage acc (Required)
-  #    az_container_name: ghdeploytfstate ## AZ backend - AZURE storage container hosting state files (Required)
-  #    tf_key: foundation-dev             ## AZ backend - Specifies name that will be given to terraform state file (Required)
-  #    gh_environment: Development        ## GH Environment. Default=null - (Optional)
-  #    tf_vars_file: config-dev.tfvars    ## Terraform TFVARS (Required)
-  #  secrets:
-  #    arm_client_id: ${{ secrets.ARM_CLIENT_ID }}             ## ARM Client ID 
-  #    arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}     ## ARM Client Secret
-  #    arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }} ## ARM Subscription ID
-  #    arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}             ## ARM Tenant ID
+  Deploy_Plan_Dev:
+    uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_apply.yml@master
+    with:
+      path: 01_Foundation                ## Path to terraform root module (Required)
+      tf_version: latest                 ## Terraform version. Default=latest (Optional)
+      az_resource_group: TF-Core-Rg      ## AZ backend - AZURE Resource Group hosting terraform backend storage acc (Required)
+      az_storage_acc: tfcorebackendsa    ## AZ backend - AZURE terraform backend storage acc (Required)
+      az_container_name: ghdeploytfstate ## AZ backend - AZURE storage container hosting state files (Required)
+      tf_key: foundation-dev             ## AZ backend - Specifies name that will be given to terraform state file (Required)
+      gh_environment: Development        ## GH Environment. Default=null - (Optional)
+      #tf_vars_file: config-dev.tfvars    ## Terraform TFVARS (Required)
+    secrets:
+      arm_client_id: ${{ secrets.ARM_CLIENT_ID }}             ## ARM Client ID 
+      arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}     ## ARM Client Secret
+      arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }} ## ARM Subscription ID
+      arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}             ## ARM Tenant ID
 
   Build_Plan_Uat:
     needs: Build_Plan_Dev
