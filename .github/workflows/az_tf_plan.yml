@@ -101,7 +101,7 @@ jobs:
         run: exit 1
 
       - name: Compress TF Plan artifact
-        run: zip -r ${{ inputs.tf_key }}.zip ./* ./.terraform
+        run: zip -r ${{ inputs.tf_key }}.zip ./* #./.terraform
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
@@ -109,7 +109,3 @@ jobs:
           name: "${{ inputs.tf_key }}"
           path: "${{ inputs.path }}/${{ inputs.tf_key }}.zip"
           retention-days: 5
-
- #     - name: Terraform Apply
- #       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
- #       run: terraform apply -auto-approve
