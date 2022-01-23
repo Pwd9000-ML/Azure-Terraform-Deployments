@@ -2,6 +2,8 @@
 
 Template repository - Use to deploy Azure Resources using Terraform and GitHub Reusable Workflows.  
 
+See my [very detailed tutorial](https://dev.to/pwd9000/multi-environment-azure-deployments-with-terraform-and-github-2450) for in depth detail.
+
 This repository can be reused by anyone to:  
 
 - Learn about GitHub reusable workflows.
