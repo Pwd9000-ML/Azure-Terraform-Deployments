@@ -33,10 +33,6 @@ on:
         required: false
         type: string
         default: null
-      tf_vars_file:
-        description: 'Specifies the Terraform TFVARS file.'
-        required: true
-        type: string
     secrets:
       arm_client_id:
         description: 'Specifies the Azure ARM CLIENT ID.'
@@ -64,7 +60,6 @@ jobs:
       CONTAINER_NAME: ${{ inputs.az_container_name }}
       RESOURCE_GROUP: ${{ inputs.az_resource_group }}
       TF_KEY: ${{ inputs.tf_key }}.tfstate
-      TF_VARS: ${{ inputs.tf_vars_file }}
       ###AZURE Client details###
       ARM_CLIENT_ID: ${{ secrets.arm_client_id }}
       ARM_CLIENT_SECRET: ${{ secrets.arm_client_secret }}
