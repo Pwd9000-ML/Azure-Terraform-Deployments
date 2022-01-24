@@ -32,6 +32,6 @@ In this demo repository, each `caller` workflow is numbered and can be independe
 ## IaC Security Scanning (TFSEC)
 
 In addition IaC scanning using TFSEC has also been applied to the `PLAN` **reusable workflow**.  
-Each modular workflow that is deployed e.g. `01_Foundation` will be scanned at the `PLAN` stage for any Terraform IaC vulnerabilities and the results of each workflow scans will be published on the GitHub Projects `Security` tab e.g:  
+Each modular terraform configuration that is deployed, when calling the plan workflow will be scanned at the `PLAN` stage for any Terraform IaC vulnerabilities and the results will be published on the GitHub Projects `Security` tab e.g:  
 
 ![image.png](https://raw.githubusercontent.com/Pwd9000-ML/Azure-Terraform-Deployments/master/assets/tfsec.png)
