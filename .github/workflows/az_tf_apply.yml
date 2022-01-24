@@ -91,4 +91,4 @@ jobs:
         run: terraform init --backend-config="storage_account_name=$STORAGE_ACCOUNT" --backend-config="container_name=$CONTAINER_NAME" --backend-config="resource_group_name=$RESOURCE_GROUP" --backend-config="key=$TF_KEY"
 
       - name: Terraform Apply
-        run: terraform apply --var-file=$TF_VARS --auto-approve
+        run: terraform apply plan.tfplan
