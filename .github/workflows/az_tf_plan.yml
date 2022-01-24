@@ -75,6 +75,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Scan IaC - tfsec
+        uses: tfsec/tfsec-sarif-action@v0.0.6
+        with:
+          sarif_file: tfsec.sarif         
+
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: tfsec.sarif  
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1.3.2
         with:
