@@ -4,9 +4,6 @@ on:
   pull_request:
     branches:
       - master
-defaults:
-  run:
-    shell: bash
 jobs:
   Plan_Dev:
     runs-on: ubuntu-latest
