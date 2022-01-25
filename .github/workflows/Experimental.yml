@@ -6,7 +6,6 @@ on:
       - master
 jobs:
   Plan_Dev:
-    #if: github.ref == 'refs/heads/master' && github.event_name == 'pull_request'
     uses: Pwd9000-ML/terraform-azurerm@master
     with:
       command: Plan
