@@ -18,7 +18,6 @@ jobs:
         tf_key: foundation-dev             ## AZ backend - Specifies name that will be given to terraform state file (Required)
         tf_vars_file: config-dev.tfvars    ## Terraform TFVARS (Required)
         enable_TFSEC: true
-      secrets:
         arm_client_id: ${{ secrets.ARM_CLIENT_ID }}             ## ARM Client ID 
         arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}     ## ARM Client Secret
         arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }} ## ARM Subscription ID
