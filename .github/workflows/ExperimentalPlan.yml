@@ -1,4 +1,4 @@
-name: "01_Foundation"
+name: "01_Foundation_Experimentplan"
 on:
   workflow_dispatch:
   pull_request:
