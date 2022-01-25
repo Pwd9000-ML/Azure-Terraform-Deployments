@@ -14,10 +14,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          path: 01_Foundation
 
       - name: Development TF Plan
         uses: Pwd9000-ML/terraform-azurerm-plan@master
-        working-directory: 01_Foundation
         with:
           az_resource_group: TF-Core-Rg      ## AZ backend - AZURE Resource Group hosting terraform backend storage acc (Required)
           az_storage_acc: tfcorebackendsa    ## AZ backend - AZURE terraform backend storage acc (Required)
