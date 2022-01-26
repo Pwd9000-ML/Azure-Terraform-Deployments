@@ -1,6 +1,6 @@
 # I have created public github marketplace actions (plan and apply) as well that can be used as shown in this example. 
-#Plan: https://github.com/marketplace/actions/create-a-terraform-plan-for-azure
-#Apply: https://github.com/marketplace/actions/apply-a-terraform-plan-for-azure
+#Plan: https://github.com/marketplace/actions/terraform-plan-for-azure
+#Apply: https://github.com/marketplace/actions/terraform-apply-for-azure
 
 name: "Marketplace-Example"
 on:
