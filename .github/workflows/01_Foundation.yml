@@ -14,7 +14,7 @@ jobs:
       az_resource_group: TF-Core-Rg      ## AZ backend - AZURE Resource Group hosting terraform backend storage acc (Required)
       az_storage_acc: tfcorebackendsa    ## AZ backend - AZURE terraform backend storage acc (Required)
       az_container_name: ghdeploytfstate ## AZ backend - AZURE storage container hosting state files (Required)
-      tf_key: foundation-dev             ## AZ backend - Specifies name that will be given to terraform state file (Required)
+      tf_key: foundation-dev             ## AZ backend - Specifies name that will be given to terraform state file and plan artifact (Required)
       tf_vars_file: config-dev.tfvars    ## Terraform TFVARS (Required)
     secrets:
       arm_client_id: ${{ secrets.ARM_CLIENT_ID }}             ## ARM Client ID 
@@ -31,7 +31,7 @@ jobs:
       az_resource_group: TF-Core-Rg      ## AZ backend - AZURE Resource Group hosting terraform backend storage acc (Required)
       az_storage_acc: tfcorebackendsa    ## AZ backend - AZURE terraform backend storage acc (Required)
       az_container_name: ghdeploytfstate ## AZ backend - AZURE storage container hosting state files (Required)
-      tf_key: foundation-dev             ## AZ backend - Specifies name that will be given to terraform state file (Required)
+      tf_key: foundation-dev             ## AZ backend - Specifies name of the terraform state file and workflow artifact to download (Required)
       gh_environment: Development        ## GH Environment. Default=null - (Optional)
     secrets:
       arm_client_id: ${{ secrets.ARM_CLIENT_ID }}             ## ARM Client ID 

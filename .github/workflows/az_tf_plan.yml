@@ -25,7 +25,7 @@ on:
         required: true
         type: string
       tf_key:
-        description: 'Specifies the Terraform state file name for this plan.'
+        description: 'Specifies the Terraform state file name for this plan. Workflow artifact will use same name'
         required: true
         type: string
       gh_environment:
