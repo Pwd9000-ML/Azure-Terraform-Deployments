@@ -16,6 +16,7 @@ jobs:
       az_container_name: ghdeploytfstate ## AZ backend - AZURE storage container hosting state files (Required)
       tf_key: etc-dev                    ## AZ backend - Specifies name that will be given to terraform state file and plan artifact(Required)
       tf_vars_file: config-dev.tfvars    ## Terraform TFVARS (Required)
+      enable_TFSEC: true                 ## (Optional)  Enable TFSEC IaC scans (Private repo requires GitHub enterprise)
     secrets:
       arm_client_id: ${{ secrets.ARM_CLIENT_ID }}             ## ARM Client ID 
       arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}     ## ARM Client Secret

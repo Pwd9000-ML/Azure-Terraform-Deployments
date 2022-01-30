@@ -31,7 +31,9 @@ In this demo repository, each `caller` workflow is numbered and can be independe
 
 ## IaC Security Scanning (TFSEC)
 
-In addition IaC scanning using TFSEC has also been applied to the `PLAN` **reusable workflow**.  
+In addition IaC scanning using TFSEC has also been applied to the `PLAN` **reusable workflow**, using the input `enable_TFSEC`. By default this setting is set to `FALSE`.  
+
+**NOTE:** If you are using a **Private** repository you will need a **GitHub Enterprise** account to enable code scanning with TFSEC. The code scanning feature is included however on any **Public** repositories. If you are using a **Private** repository and do not have an enterprise account, leave this setting on the default: `FALSE` and have a look at my other blog post on [IaC Scanning with TFSEC for VsCode (Extension)](https://dev.to/pwd9000/iac-scanning-with-tfsec-for-vscode-extension-27h8) instead.
 
 Each terraform configuration, when calling the `PLAN` **reusable workflow** will be scanned for any Terraform IaC vulnerabilities and misconfigurations and the results will be published on the GitHub Projects `Security` tab e.g:  
 

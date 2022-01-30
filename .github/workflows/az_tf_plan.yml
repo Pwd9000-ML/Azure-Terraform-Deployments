@@ -37,6 +37,11 @@ on:
         description: 'Specifies the Terraform TFVARS file.'
         required: true
         type: string
+      enable_TFSEC:
+        description: '(Optional) Enables TFSEC IaC scans and code quality checks on Terraform configurations'
+        required: false
+        type: bool
+        default: false
     secrets:
       arm_client_id:
         description: 'Specifies the Azure ARM CLIENT ID.'
@@ -65,6 +70,7 @@ jobs:
       RESOURCE_GROUP: ${{ inputs.az_resource_group }}
       TF_KEY: ${{ inputs.tf_key }}.tfstate
       TF_VARS: ${{ inputs.tf_vars_file }}
+      ENABLE_TFSEC: $ {{ inputs.enable_TFSEC }}
       ###AZURE Client details###
       ARM_CLIENT_ID: ${{ secrets.arm_client_id }}
       ARM_CLIENT_SECRET: ${{ secrets.arm_client_secret }}
@@ -76,11 +82,13 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Scan IaC - tfsec
+        if: ${{ inputs.ENABLE_TFSEC == true }}
         uses: tfsec/tfsec-sarif-action@v0.0.6
         with:
           sarif_file: tfsec.sarif         
 
       - name: Upload SARIF file
+        if: ${{ inputs.ENABLE_TFSEC == true }}
         uses: github/codeql-action/upload-sarif@v1
         with:
           sarif_file: tfsec.sarif  
