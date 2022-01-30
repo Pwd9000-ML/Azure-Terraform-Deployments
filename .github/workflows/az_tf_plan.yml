@@ -40,7 +40,7 @@ on:
       enable_TFSEC:
         description: '(Optional) Enables TFSEC IaC scans and code quality checks on Terraform configurations'
         required: false
-        type: bool
+        type: boolean
         default: false
     secrets:
       arm_client_id:
