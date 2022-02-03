@@ -1,12 +1,9 @@
 name: "02_Storage"
 on:
   workflow_dispatch:
-#  pull_request:
-#    branches:
-#      - master
+
 jobs:
   Plan_Dev:
-    #if: github.ref == 'refs/heads/master' && github.event_name == 'pull_request'
     uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_plan.yml@master
     with:
       path: 02_Storage                   ## Path to terraform root module (Required)
@@ -41,7 +38,6 @@ jobs:
       arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}             ## ARM Tenant ID
 
   Plan_Uat:
-    #if: github.ref == 'refs/heads/master' && github.event_name == 'pull_request'
     uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_plan.yml@master
     with:
       path: 02_Storage
@@ -74,7 +70,6 @@ jobs:
       arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}
 
   Plan_Prod:
-    #if: github.ref == 'refs/heads/master' && github.event_name == 'pull_request'
     uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_plan.yml@master
     with:
       path: 02_Storage
