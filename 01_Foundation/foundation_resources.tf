@@ -14,7 +14,7 @@ resource "azurerm_resource_group" "rg" {
 
 #Create a Key Vault for the Resource Group
 resource "azurerm_key_vault" "kv" {
-  name                        = lower(var.key_vault_name)
+  name                        = "${lower(var.key_vault_name)}${random_integer.kv_num.result}"
   location                    = azurerm_resource_group.rg.location
   resource_group_name         = azurerm_resource_group.rg.name
   enable_rbac_authorization   = var.use_rbac_mode
@@ -24,4 +24,9 @@ resource "azurerm_key_vault" "kv" {
   purge_protection_enabled    = false
   sku_name                    = "standard"
   tags                        = var.tags
+}
+
+resource "random_integer" "kv_num" {
+  min = 0001
+  max = 9999
 }
