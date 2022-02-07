@@ -45,7 +45,7 @@ Each terraform configuration, when calling the `PLAN` **reusable workflow** will
 * Dependabot will open a PR on the `master` branch with the version bump automatically.
 * The workflow `Marketplace_Example_Tests.yml` will run upon a Dependabot automated PR to run a `plan` as a test with the new versions.
 * Dependabot cannot use `Actions Secrets`, thus the same secrets are added to the GitHub repository `dependabot secrets`.
-* Terraform dependencies are tested using the [Marketplace_Example_Tests.yml](https://github.com/Pwd9000-ML/Azure-Terraform-Deployments/blob/master/.github/workflows/Marketplace_Example-Tests.yml) workflow and additional permissions are added due to the following [documentation](https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/automating-dependabot-with-github-actions):
+* Terraform dependencies are tested using the [Marketplace_Example_Tests.yml](https://github.com/Pwd9000-ML/Azure-Terraform-Deployments/blob/master/.github/workflows/Marketplace_Example_Tests.yml) workflow and additional permissions are added due to the following [documentation](https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/automating-dependabot-with-github-actions):
 
 Dependabot is able to trigger GitHub Actions workflows on its pull requests and comments; however, certain events are treated differently.
 
