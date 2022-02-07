@@ -14,7 +14,7 @@ resource "azurerm_resource_group" "rg" {
 
 #Create a Key Vault for the Resource Group
 resource "azurerm_key_vault" "kv" {
-  name                        = var.key_vault_name
+  name                        = lower(var.key_vault_name)
   location                    = azurerm_resource_group.rg.location
   resource_group_name         = azurerm_resource_group.rg.name
   enable_rbac_authorization   = var.use_rbac_mode
