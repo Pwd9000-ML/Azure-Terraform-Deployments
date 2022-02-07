@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
   pull_request:
     branches:
-      - master
+      - dependabot/**
 
 jobs:
   Plan_Dev:
@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Dev TF Plan
-        uses: Pwd9000-ML/terraform-azurerm-plan@v1.0.4-pre
+        uses: Pwd9000-ML/terraform-azurerm-plan@v1.0.4
         with:
           path: 01_Foundation                ## (Optional) Specify path TF module relevant to repo root. Default="."
           az_resource_group: TF-Core-Rg      ## (Required) AZ backend - AZURE Resource Group hosting terraform backend storage acc 
@@ -31,7 +31,7 @@ jobs:
           arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}     ## (Required)ARM Client Secret
           arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }} ## (Required) ARM Subscription ID
           arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}             ## (Required) ARM Tenant ID
-          github_token: ${{ secrets.GITHUB_TOKEN }}               ## (Required) The ${{ secrets.GITHUB_TOKEN }} already has permissions, but if you're using your own token, ensure it has the repo scope.
+          github_token: ${{ secrets.GITHUB_TOKEN }} ## (Required) Needed to comment output on PR's. ${{ secrets.GITHUB_TOKEN }} already has permissions.
 
   Apply_Dev:
     needs: Plan_Dev
@@ -39,6 +39,7 @@ jobs:
     environment: Development #(Optional) If using GitHub Environments      
     steps:
       - name: Dev TF Deploy
+        if: github.ref == 'refs/heads/master'
         uses: Pwd9000-ML/terraform-azurerm-apply@v1.0.2
         with:
           az_resource_group: TF-Core-Rg      ## (Required) AZ backend - AZURE Resource Group hosting terraform backend storage acc 
