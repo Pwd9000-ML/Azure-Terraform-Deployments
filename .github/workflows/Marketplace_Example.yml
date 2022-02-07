@@ -5,6 +5,9 @@
 name: "Marketplace-Example"
 on:
   workflow_dispatch:
+  pull_request:
+    branches:
+      - 'master'
 
 jobs:
   Plan_Dev:
@@ -36,7 +39,7 @@ jobs:
     environment: Development #(Optional) If using GitHub Environments      
     steps:
       - name: Dev TF Deploy
-        if: github.ref == 'refs/heads/master'
+        if: github.head_ref != 'refs/heads/dependabot/**'
         uses: Pwd9000-ML/terraform-azurerm-apply@v1.0.2
         with:
           az_resource_group: TF-Core-Rg      ## (Required) AZ backend - AZURE Resource Group hosting terraform backend storage acc 
