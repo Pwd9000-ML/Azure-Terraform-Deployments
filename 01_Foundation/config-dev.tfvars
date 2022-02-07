@@ -1,6 +1,6 @@
-resource_group_name = "Demo-Infra-Dev-Rg"
+resource_group_name = "Demo-Inf-Dev-Rg"
 location            = "UKSouth"
-key_vault_name      = "Pwd9000-Infra-Dev-Kv"
+key_vault_name      = "Pwd9000-Inf-Dev-Kv"
 use_rbac_mode       = true
 tags = {
   terraformDeployment = "true",

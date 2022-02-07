@@ -1,4 +1,4 @@
-resource_group_name = "Demo-Infra-Dev-Rg"
+resource_group_name = "Demo-Inf-Dev-Rg"
 location            = "UKSouth"
 
 storage_config = [

@@ -5,6 +5,9 @@
 name: "Marketplace-Example"
 on:
   workflow_dispatch:
+  pull_request:
+    branches:
+      - master
 
 jobs:
   Plan_Dev:
@@ -15,7 +18,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Dev TF Plan
-        uses: Pwd9000-ML/terraform-azurerm-plan@v1.0.3
+        uses: Pwd9000-ML/terraform-azurerm-plan@v1.0.4-pre
         with:
           path: 01_Foundation                ## (Optional) Specify path TF module relevant to repo root. Default="."
           az_resource_group: TF-Core-Rg      ## (Required) AZ backend - AZURE Resource Group hosting terraform backend storage acc 
@@ -28,6 +31,7 @@ jobs:
           arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}     ## (Required)ARM Client Secret
           arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }} ## (Required) ARM Subscription ID
           arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}             ## (Required) ARM Tenant ID
+          github_token: ${{ secrets.GITHUB_TOKEN }}               ## (Required) The ${{ secrets.GITHUB_TOKEN }} already has permissions, but if you're using your own token, ensure it has the repo scope.
 
   Apply_Dev:
     needs: Plan_Dev

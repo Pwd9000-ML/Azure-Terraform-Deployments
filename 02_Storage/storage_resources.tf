@@ -8,7 +8,7 @@ resource "azurerm_storage_account" "sas" {
   location            = var.location
 
   #values from variable config object
-  name                      = var.storage_config[count.index].name
+  name                      = "${lower(var.storage_config[count.index].name)}${random_integer.sa_num.result}"
   account_kind              = var.storage_config[count.index].account_kind
   account_tier              = var.storage_config[count.index].account_tier
   account_replication_type  = var.storage_config[count.index].account_replication_type
@@ -19,4 +19,9 @@ resource "azurerm_storage_account" "sas" {
 
   #Apply tags
   tags = var.tags
+}
+
+resource "random_integer" "sa_num" {
+  min = 0001
+  max = 9999
 }
