@@ -8,7 +8,7 @@ updates:
   - package-ecosystem: "terraform" 
     directory: "/01_Foundation"
     schedule:
-      interval: "daily"
+      interval: "weekly"
 
   - package-ecosystem: "terraform" 
     directory: "/02_Storage"
