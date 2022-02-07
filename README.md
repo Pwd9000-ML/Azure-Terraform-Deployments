@@ -38,3 +38,28 @@ In addition IaC scanning using TFSEC has also been applied to the `PLAN` **reusa
 Each terraform configuration, when calling the `PLAN` **reusable workflow** will be scanned for any Terraform IaC vulnerabilities and misconfigurations and the results will be published on the GitHub Projects `Security` tab e.g:  
 
 ![image.png](https://raw.githubusercontent.com/Pwd9000-ML/Azure-Terraform-Deployments/master/assets/tfsec.png)
+
+## Dependabot
+
+* Dependabot is enabled to check dependencies for all github-workflows as well as each Terraform module version.
+* Dependabot cannot use `Actions Secrets`, the same secrets are added to the repository `dependabot secrets`.
+* Terraform dependencies are tested using the [Marketplace-Example.yml](https://github.com/Pwd9000-ML/Azure-Terraform-Deployments/blob/master/.github/workflows/Marketplace_Example.yml) workflow and additional permissions are added due to the following:
+
+Dependabot is able to trigger GitHub Actions workflows on its pull requests and comments; however, certain events are treated differently.
+
+For workflows initiated by Dependabot `(github.actor == "dependabot[bot]")` using the `pull_request`, `pull_request_review`, `pull_request_review_comment`, and `push` events, the following restrictions apply:
+
+* `GITHUB_TOKEN` has read-only permissions by default.
+* Secrets are populated from `Dependabot secrets`. GitHub Actions secrets are not available!
+
+```yml
+jobs:
+# Dependabot will open a PR on terraform version changes, this jon will test that version change by only running a plan (Secrets are separate)
+  dependabot:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write ## Additional GITHUB_TOKEN permission for the dependabot job
+      issues: write ## Additional GITHUB_TOKEN permission for the dependabot job
+      repository-projects: write ## Additional GITHUB_TOKEN permission for the dependabot job
+    if: ${{ github.actor == 'dependabot[bot]' }} ## Run test against the automatic dependabot PR raised
+```
