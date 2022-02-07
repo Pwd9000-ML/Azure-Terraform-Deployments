@@ -13,6 +13,10 @@ jobs:
 # Dependabot will open a PR on terraform version changes, this jon will test that version change by only running a plan (Secrets are separate)
   dependabot:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      issues: write
+      #repository-projects: write
     if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
       - name: Checkout
