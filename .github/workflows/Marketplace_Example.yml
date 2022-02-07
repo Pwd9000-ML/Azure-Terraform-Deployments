@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Dev TF Plan
-        uses: Pwd9000-ML/terraform-azurerm-plan@v1.0.3
+        uses: Pwd9000-ML/terraform-azurerm-plan@v1.0.4-pre
         with:
           path: 01_Foundation                ## (Optional) Specify path TF module relevant to repo root. Default="."
           az_resource_group: TF-Core-Rg      ## (Required) AZ backend - AZURE Resource Group hosting terraform backend storage acc 
