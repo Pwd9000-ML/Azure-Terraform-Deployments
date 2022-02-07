@@ -1,0 +1,39 @@
+# I have created public github marketplace actions (plan and apply) as well that can be used as shown in this example. 
+#Plan: https://github.com/marketplace/actions/terraform-plan-for-azure
+#Apply: https://github.com/marketplace/actions/terraform-apply-for-azure
+
+name: "Marketplace-Example-Tests"
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+# Dependabot will open a PR on terraform version changes, this 'dependabot' job is only used to test TF version changes by running a plan.
+  dependabot:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      issues: write
+      repository-projects: write
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Run Dependency Tests - Plan
+        uses: Pwd9000-ML/terraform-azurerm-plan@v1.0.4
+        with:
+          path: 01_Foundation                ## (Optional) Specify path TF module relevant to repo root. Default="."
+          az_resource_group: TF-Core-Rg      ## (Required) AZ backend - AZURE Resource Group hosting terraform backend storage acc 
+          az_storage_acc: tfcorebackendsa    ## (Required) AZ backend - AZURE terraform backend storage acc 
+          az_container_name: ghdeploytfstate ## (Required) AZ backend - AZURE storage container hosting state files 
+          tf_key: foundation-dev             ## (Required) AZ backend - Specifies name that will be given to terraform state file and plan artifact
+          tf_vars_file: config-dev.tfvars    ## (Required) Specifies Terraform TFVARS file name inside module path
+          enable_TFSEC: true                 ## (Optional)  Enable TFSEC IaC scans
+          arm_client_id: ${{ secrets.ARM_CLIENT_ID }}             ## (Required - Dependabot Secrets) ARM Client ID 
+          arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}     ## (Required - Dependabot Secrets) ARM Client Secret
+          arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }} ## (Required - Dependabot Secrets) ARM Subscription ID
+          arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}             ## (Required - Dependabot Secrets) ARM Tenant ID
+          github_token: ${{ secrets.GITHUB_TOKEN }} ## (Required) Needed to comment output on PR's. ${{ secrets.GITHUB_TOKEN }} already has permissions.
