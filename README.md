@@ -54,7 +54,7 @@ For workflows initiated by Dependabot `(github.actor == "dependabot[bot]")` usin
 
 ```yml
 jobs:
-# Dependabot will open a PR on terraform version changes, this jon will test that version change by only running a plan (Secrets are separate)
+# Dependabot will open a PR on terraform version changes, this 'dependabot' job is only used to test TF version changes by running a plan.
   dependabot:
     runs-on: ubuntu-latest
     permissions:
