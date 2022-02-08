@@ -35,7 +35,7 @@ jobs:
           arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}     ## (Required - Actions Secrets) ARM Client Secret
           arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }} ## (Required - Actions Secrets) ARM Subscription ID
           arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}             ## (Required - Actions Secrets) ARM Tenant ID
-          github_token: ${{ secrets.GITHUB_TOKEN }} ## (Required) Needed to comment output on PR's. ${{ secrets.GITHUB_TOKEN }} already has permissions.
+          github_token: ${{ secrets.GITHUB_TOKEN }} ## (Required) Needed to comment output on PR's. ${{ secrets.GITHUB_TOKEN }} already has permissions
 
 ##### DEPLOY #####
   Apply_Dev_Deploy:
