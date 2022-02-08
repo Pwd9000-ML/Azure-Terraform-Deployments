@@ -1,6 +1,13 @@
 # Azure-Terraform-Deployments
 
-Template repository - Use to deploy Azure Resources using Terraform and GitHub Reusable Workflows.  
+Template repository - Use to deploy Azure Resources using Terraform and **GitHub Reusable Workflows**.  
+
+There's also a demo workflow called: [Marketplace_Example.yml](https://github.com/Pwd9000-ML/Azure-Terraform-Deployments/blob/master/.github/workflows/Marketplace_Example.yml) which shows how to use my **Public Marketplace GitHub Actions** instead of reusable workflows. I have put more development effort into the public actions and so they contain more features such as the ability to `Deploy` or `Destroy` Terraform plans.  
+
+You can see more detail on the public actions here:  
+
+* **[Terraform Plan for AZURE](https://github.com/marketplace/actions/terraform-plan-for-azure)**
+* **[Terraform Apply for AZURE](https://github.com/marketplace/actions/terraform-apply-for-azure)**
 
 See my [very detailed tutorial](https://dev.to/pwd9000/multi-environment-azure-deployments-with-terraform-and-github-2450) for in depth detail.
 
