@@ -22,7 +22,7 @@ Showcasing how to use GitHub reusable workflows and GitHub environments to build
 
 ![image.png](https://raw.githubusercontent.com/Pwd9000-ML/Azure-Terraform-Deployments/master/assets/main.png)
 
-In this demo repository, each `caller` workflow is numbered and can be independently deployed e.g.
+In this demo repository, each `caller` workflow is numbered and can be independently deployed e.g:  
 
 **01_Foundation:**
 
