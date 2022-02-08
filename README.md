@@ -72,3 +72,4 @@ jobs:
       repository-projects: write ## Additional GITHUB_TOKEN permission for the dependabot job
     if: ${{ github.actor == 'dependabot[bot]' }} ## Run test against the automatic dependabot PR raised
 ```
+
