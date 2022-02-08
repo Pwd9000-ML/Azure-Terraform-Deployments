@@ -22,11 +22,11 @@ Showcasing how to use GitHub reusable workflows and GitHub environments to build
 
 ![image.png](https://raw.githubusercontent.com/Pwd9000-ML/Azure-Terraform-Deployments/master/assets/main.png)
 
-In this demo repository, each `caller` workflow is numbered and can be independently deployed e.g.
+In this demo repository, each `caller` workflow is numbered and can be independently deployed e.g:  
 
 **01_Foundation:**
 
-- The first `caller` workflow `01_Foundation` will call and trigger a reusable workflow `az_tf_plan` and create a foundational terraform deployment `PLAN` based on the repository `path: ./01_Foundation` containing the terraform ROOT module/configuration of an Azure Resource Group and key vault. The plan artifacts are validated, compressed and uploaded into the workflow artifacts, the caller workflow `01_Foundation` will then call and trigger the second reusable workflow `az_tf_apply` that will download and decompress the `PLAN` artifact and trigger the deployment based on the plan. (Also demonstrated is how to use GitHub Environments to do multi staged environment based deployments with approvals - Optional)
+- The first `caller` workflow `01_Foundation` will call and trigger a reusable workflow `az_tf_plan` and create a foundational terraform deployment `PLAN` based on the repository `path: ./01_Foundation` containing the terraform ROOT module/configuration of an Azure Resource Group and key vault. The plan artifacts are validated, compressed and uploaded into the workflow artifacts, the caller workflow `01_Foundation` will then call and trigger the second reusable workflow `az_tf_apply` that will download and decompress the `PLAN` artifact and trigger the deployment based on the plan. (Also demonstrated is how to use GitHub Environments to do multi staged environment based deployments with approvals - Optional).
 
 **02_Storage:**
 
