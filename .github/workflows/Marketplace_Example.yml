@@ -74,7 +74,7 @@ jobs:
           path: 01_Foundation                ## (Optional) Specify path TF module relevant to repo root. Default="."
           plan_mode: destroy                 ## (Optional) Specify plan mode. Valid options are "deploy" or "destroy". Default="deploy"
           tf_version: latest                 ## (Optional) Specifies version of Terraform to use. e.g: 1.1.0 Default="latest"
-          tf_vars_file: ""                   ## (Optional) Specifies Terraform TFVARS file name inside module path. Default=null
+          tf_vars_file: null                   ## (Optional) Specifies Terraform TFVARS file name inside module path. Default=null
           tf_key: foundation-dev             ## (Required) AZ backend - Specifies name that will be given to terraform state file and plan artifact
           enable_TFSEC: false                ## (Optional)  Enable TFSEC IaC scans
           az_resource_group: TF-Core-Rg      ## (Required) AZ backend - AZURE Resource Group hosting terraform backend storage acc 
