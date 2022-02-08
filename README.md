@@ -6,10 +6,10 @@ There's also a demo workflow called: [Marketplace_Example.yml](https://github.co
 
 You can see more detail on the public actions here:  
 
-* **[Terraform Plan for AZURE](https://github.com/marketplace/actions/terraform-plan-for-azure)**
-* **[Terraform Apply for AZURE](https://github.com/marketplace/actions/terraform-apply-for-azure)**
+* **[Terraform Plan for AZURE](https://github.com/marketplace/actions/terraform-plan-for-azure).**
+* **[Terraform Apply for AZURE](https://github.com/marketplace/actions/terraform-apply-for-azure).**
 
-See my [very detailed tutorial](https://dev.to/pwd9000/multi-environment-azure-deployments-with-terraform-and-github-2450) for in depth detail.
+See my [very detailed tutorial](https://dev.to/pwd9000/multi-environment-azure-deployments-with-terraform-and-github-2450) for in depth detail.  
 
 This repository can be reused by anyone to:  
 
