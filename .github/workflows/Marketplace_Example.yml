@@ -22,7 +22,7 @@ jobs:
       - name: Dev TF Plan Deploy
         uses: Pwd9000-ML/terraform-azurerm-plan@v1.1.1-bug2
         with:
-          path: "01_Foundation"                ## (Optional) Specify path TF module relevant to repo root. Default="."
+          path: 01_Foundation                  ## (Optional) Specify path TF module relevant to repo root. Default="."
           plan_mode: "deploy"                  ## (Optional) Specify plan mode. Valid options are "deploy" or "destroy". Default="deploy"
           tf_version: "latest"                 ## (Optional) Specifies version of Terraform to use. e.g: 1.1.0 Default="latest"
           tf_vars_file: "config-dev.tfvars"    ## (Required) Specifies Terraform TFVARS file name inside module path.
