@@ -60,6 +60,7 @@ jobs:
 
 ##### PLAN A DESTROY #####
   Plan_Dev_Destroy:
+    needs: Apply_Dev_Deploy
     runs-on: ubuntu-latest
     if: ${{ github.actor != 'dependabot[bot]' }}
     environment: null #(Optional) If using GitHub Environments          
