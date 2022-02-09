@@ -11,7 +11,7 @@ on:
 
 jobs:
 # Dependabot will open a PR on terraform version changes, this 'dependabot' job is only used to test TF version changes by running a plan only.
-  dependabot-plan-apply:
+  dependabot-plan-apply-destroy:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
@@ -22,10 +22,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Run Dependency Tests - Plan AND Apply
+      - name: Run Dependency Tests - Plan AND Apply AND Destroy
         uses: Pwd9000-ML/terraform-azurerm-tests@v1.0.0
         with:
-          test_type: plan-apply              ## (Required) Valid options are "plan", "plan-apply", "plan-apply-destroy". Default="plan"
+          test_type: plan-apply-destroy      ## (Required) Valid options are "plan", "plan-apply", "plan-apply-destroy". Default="plan"
           path: 01_Foundation                ## (Optional) Specify path TF module relevant to repo root. Default="."
           tf_version: latest                 ## (Optional) Specifies version of Terraform to use. e.g: 1.1.0 Default="latest"
           tf_vars_file: config-tests.tfvars  ## (Required) Specifies Terraform TFVARS file name inside module path (Testing vars)
