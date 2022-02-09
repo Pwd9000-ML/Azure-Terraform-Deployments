@@ -16,7 +16,7 @@ jobs:
       - name: Plan-Only
         uses: Pwd9000-ML/terraform-azurerm-tests@master
         with:
-          test_type: plan
+          test_type: plan-apply ## Valid options are "plan", "plan-apply", "plan-apply-destroy" Default="plan"
           path: 01_Foundation
           tf_vars_file: config-tests.tfvars
           tf_key: foundation-tests
