@@ -10,7 +10,7 @@ on:
       - master
 
 jobs:
-# Dependabot will open a PR on terraform version changes, this 'dependabot' job is only used to test TF version changes by running a plan only.
+# Dependabot will open a PR on terraform version changes, this 'dependabot' job is only used to test TF version changes by running a plan, apply and destroy in sequence.
   dependabot-plan-apply-destroy:
     runs-on: ubuntu-latest
     permissions:
