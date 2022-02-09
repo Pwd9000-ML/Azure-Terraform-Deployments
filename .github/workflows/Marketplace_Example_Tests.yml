@@ -1,8 +1,9 @@
 #This a demo workflow which will automatically run tests when Dependabot opens a PR.
 #Tests performed will output any issues detected incl plans to the PR.
 #Tests are performed against '01_Foundation' module using "config-tests.tfvars" which is only used for integration tests.
+# Check out the action documentation for more details here: https://github.com/marketplace/actions/terraform-tests-for-azure
 
-name: "Marketplace-Example-Tests"
+name: "Marketplace-Example-Dependabot-Automated-Tests"
 on:
   workflow_dispatch:
   pull_request:
