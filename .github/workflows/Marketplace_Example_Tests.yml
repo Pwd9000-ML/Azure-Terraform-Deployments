@@ -1,7 +1,6 @@
-#This workflow will automatically run tests when Dependabot opens a PR.
-#Tests are only partial and is performed by creating a (PLAN ONLY) and outputting any issues detected to the PR.
-#Tests are only performed against '01_Foundation' module and against the 'Development' environment.
-#Full tests will include PLAN AND APPLY for each module followed by DESTROY (Coming Soon)
+#This a demo workflow which will automatically run tests when Dependabot opens a PR.
+#Tests performed will output any issues detected incl plans to the PR.
+#Tests are performed against '01_Foundation' module using "config-tests.tfvars" which is only used for integration tests.
 
 name: "Marketplace-Example-Tests"
 on:
@@ -11,8 +10,8 @@ on:
       - master
 
 jobs:
-# Dependabot will open a PR on terraform version changes, this 'dependabot' job is only used to test TF version changes by running a plan.
-  dependabot:
+# Dependabot will open a PR on terraform version changes, this 'dependabot' job is only used to test TF version changes by running a plan only.
+  dependabot-plan-only:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
@@ -23,17 +22,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Run Dependency Tests - Plan
-        uses: Pwd9000-ML/terraform-azurerm-plan@v1.2.0
+      - name: Run Dependency Tests - Plan Only
+        uses: Pwd9000-ML/terraform-azurerm-tests@v1.0.0
         with:
+          test_type: plan                    ## (Required) Valid options are "plan", "plan-apply", "plan-apply-destroy". Default="plan"
           path: 01_Foundation                ## (Optional) Specify path TF module relevant to repo root. Default="."
-          plan_mode: deploy                  ## (Optional) Specify plan mode. Valid options are "deploy" or "destroy". Default="deploy"
           tf_version: latest                 ## (Optional) Specifies version of Terraform to use. e.g: 1.1.0 Default="latest"
-          tf_vars_file: config-dev.tfvars    ## (Required) Specifies Terraform TFVARS file name inside module path
-          tf_key: foundation-dev             ## (Required) AZ backend - Specifies name that will be given to terraform state file and plan artifact
-          enable_TFSEC: true                 ## (Optional) Enable TFSEC IaC scans
-          az_resource_group: TF-Core-Rg      ## (Required) AZ backend - AZURE Resource Group hosting terraform backend storage acc 
-          az_storage_acc: tfcorebackendsa    ## (Required) AZ backend - AZURE terraform backend storage acc 
+          tf_vars_file: config-tests.tfvars  ## (Required) Specifies Terraform TFVARS file name inside module path (Testing vars)
+          tf_key: foundation-tests           ## (Required) AZ backend - Specifies name that will be given to terraform state file and plan artifact (testing state)
+          az_resource_group: TF-Core-Rg      ## (Required) AZ backend - AZURE Resource Group hosting terraform backend storage account
+          az_storage_acc: tfcorebackendsa    ## (Required) AZ backend - AZURE terraform backend storage account
           az_container_name: ghdeploytfstate ## (Required) AZ backend - AZURE storage container hosting state files 
           arm_client_id: ${{ secrets.ARM_CLIENT_ID }}             ## (Required - Dependabot Secrets) ARM Client ID 
           arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}     ## (Required - Dependabot Secrets) ARM Client Secret
