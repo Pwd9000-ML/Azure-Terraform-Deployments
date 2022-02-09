@@ -7,16 +7,20 @@ There's also a demo workflow called: [Marketplace_Example.yml](https://github.co
 You can see more detail on the public actions here:  
 
 * **[Terraform Plan for AZURE](https://github.com/marketplace/actions/terraform-plan-for-azure).**
-* **[Terraform Apply for AZURE](https://github.com/marketplace/actions/terraform-apply-for-azure).**
+* **[Terraform Apply for AZURE](https://github.com/marketplace/actions/terraform-apply-for-azure).**  
 
-See my [detailed tutorial](https://dev.to/pwd9000/multi-environment-azure-deployments-with-terraform-and-github-2450) for in depth detail.  
+For more in depth details on usage and examples I also have a detailed online tutorial on my blog:  
+See [Part 1](https://dev.to/pwd9000/multi-environment-azure-deployments-with-terraform-and-github-2450) if you want to use **GitHub Reusable Workflows**.  
+Or [Part 2](https://dev.to/pwd9000/multi-environment-azure-deployments-with-terraform-and-github-2450) if you want to use my **Public Marketplace GitHub Actions** instead.
 
 This repository can be reused by anyone to:  
 
 - Learn about GitHub reusable workflows.
-- Learn about terraform deployments in AZURE.
+- Learn about GitHub Actions.
+- Learn about terraform deployments in AZURE using GitHub.
 - Learn about multi-stage deployments and approvals in GitHub.
-- Utilize in your own organization to build AZURE Infrastructure at scale.
+- Learn how to build Terraform modules using a non-monolithic approach.
+- Utilize examples shown here in your own organization to build AZURE Infrastructure at scale.
 
 Showcasing how to use GitHub reusable workflows and GitHub environments to build enterprise scale multi environment infrastructure deployments in Azure using a non-monolithic approach, to construct and simplify complex terraform deployments into simpler manageable work streams and reduce duplicate workflow code by utilizing reusable GitHub workflows.
 
