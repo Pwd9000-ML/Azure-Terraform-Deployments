@@ -11,7 +11,7 @@ You can see more detail on the public actions here:
 
 For more in depth details on usage and examples I also have a detailed online tutorial on my blog:  
 See [Part 1](https://dev.to/pwd9000/multi-environment-azure-deployments-with-terraform-and-github-2450) if you want to use **GitHub Reusable Workflows**.  
-Or [Part 2](https://dev.to/pwd9000/automate-terraform-module-releases-on-the-public-registry-using-github-4775) if you want to use my **Public Marketplace GitHub Actions** instead.
+Or [Part 2](https://dev.to/pwd9000/multi-environment-azure-deployments-with-terraform-and-github-part-2-pdl) if you want to use my **Public Marketplace GitHub Actions** instead.
 
 This repository can be reused by anyone to:  
 
