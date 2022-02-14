@@ -9,6 +9,8 @@ on:
   pull_request:
     branches:
       - master
+    paths:
+      - '01_Foundation/**'
 
 jobs:
 # Dependabot will open a PR on terraform version changes, this 'dependabot' job is only used to test TF version changes by running a plan, apply and destroy in sequence.
