@@ -32,7 +32,7 @@ resource "azurerm_app_service" "APPSVC" {
   https_only          = true
 
   identity {
-    type = SystemAssigned
+    type = "SystemAssigned"
   }
 
   site_config {
