@@ -28,9 +28,9 @@ variable "app_insights_name" {
 }
 
 variable "workspace_id" {
-    type = string
-    default = null
-    description = "Speciy the log analytics workspace ID, if present (If left as null, uses legacy mode)"
+  type        = string
+  default     = null
+  description = "Speciy the log analytics workspace ID, if present (If left as null, uses legacy mode)"
 }
 
 #APPSVC
@@ -42,13 +42,7 @@ variable "appsvc_name" {
 variable "appsvc_settings" {
   type        = map(any)
   description = "Specifies the app service settings to be created."
-  default = null
-}
-
-variable "linux_fx_version" {
-    type = string
-    default = null
-    description = "Specifies linux version"
+  default     = null
 }
 
 #ACR

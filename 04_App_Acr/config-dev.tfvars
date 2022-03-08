@@ -12,9 +12,9 @@ app_insights_name = "demo-inf-dev-insights"
 #APPSVC
 appsvc_name = "demo-inf-dev-linux-appsvc"
 appsvc_settings = {
-    APPINSIGHTS_INSTRUMENTATIONKEY = "!!sensitive_Key!!"
-    sensitive_key1 = "P@ssw0rd01"
-    sensitive_key2 = "P@ssw0rd02"
+  APPINSIGHTS_INSTRUMENTATIONKEY = "!!sensitive_Key!!"
+  sensitive_key1                 = "P@ssw0rd01"
+  sensitive_key2                 = "P@ssw0rd02"
 }
 
 #ACR
