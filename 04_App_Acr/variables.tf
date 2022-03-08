@@ -43,6 +43,7 @@ variable "appsvc_settings" {
   type        = map(any)
   description = "Specifies the app service settings to be created."
   default     = null
+  sensitive   = true
 }
 
 #ACR
