@@ -25,8 +25,8 @@ resource "azurerm_application_insights" "INSIGHTS" {
 }
 
 output "insights_key" {
-    value = azurerm_application_insights.INSIGHTS.instrumentation_key
-    sensitive = true
+  value     = azurerm_application_insights.INSIGHTS.instrumentation_key
+  sensitive = true
 }
 
 resource "azurerm_app_service" "APPSVC" {
