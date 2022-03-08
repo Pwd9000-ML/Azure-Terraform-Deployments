@@ -41,6 +41,6 @@ resource "azurerm_app_service" "APPSVC" {
     linux_fx_version                     = var.asp_kind == "linux" ? local.linux_fx_version : null
   }
 
-  app_settings = lookup(local.app_settings, linux_app_settings, null)
+  app_settings = lookup(local.app_settings, "linux_app_settings", null)
   #app_settings = var.appsvc_settings
 }
