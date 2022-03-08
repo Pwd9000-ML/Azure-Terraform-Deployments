@@ -24,6 +24,11 @@ resource "azurerm_application_insights" "INSIGHTS" {
   workspace_id        = var.workspace_id != null ? var.workspace_id : null
 }
 
+output "insights_key" {
+    value = azurerm_application_insights.INSIGHTS.instrumentation_key
+    sensitive = true
+}
+
 resource "azurerm_app_service" "APPSVC" {
   name                = var.appsvc_name
   location            = azurerm_resource_group.RG.location
@@ -41,6 +46,6 @@ resource "azurerm_app_service" "APPSVC" {
     linux_fx_version                     = var.asp_kind == "linux" ? local.linux_fx_version : null
   }
 
-  #app_settings = lookup(local.app_settings, "linux_app_settings", null)
-  app_settings = var.appsvc_settings
+  app_settings = lookup(local.app_settings, "linux_app_settings", null)
+  #app_settings = var.appsvc_settings
 }
