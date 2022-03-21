@@ -5,7 +5,7 @@ global_settings = {
   }
   resource_defaults = {
     virtual_machines = {
-        use_azmanaged_storage_for_boot_diagnostics = true
+      use_azmanaged_storage_for_boot_diagnostics = true
     }
   }
 }
@@ -23,7 +23,7 @@ virtual_machines = {
   example_vm1 = {
     resource_group_key = "vm_region1"
     provision_vm_agent = true
-    os_type = "linux"
+    os_type            = "linux"
 
     # the auto-generated ssh key in keyvault secret. Secret name being {VM name}-ssh-public and {VM name}-ssh-private
     keyvault_key = "example_vm_rg1"
