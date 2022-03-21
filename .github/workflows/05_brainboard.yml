@@ -1,0 +1,55 @@
+name: "05_brainboard"
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+##### PLAN A DEPLOYMENT #####
+  Plan_Dev_Deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor != 'dependabot[bot]' }}
+    environment: null        
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Dev TF Plan Deploy
+        uses: Pwd9000-ML/terraform-azurerm-plan@v1.2.0
+        with:
+          path: 05_brainboard_demo
+          plan_mode: deploy
+          tf_version: latest
+          tf_vars_file: config.tfvars
+          tf_key: brainboard-demo
+          enable_TFSEC: false
+          az_resource_group: TF-Core-Rg
+          az_storage_acc: tfcorebackendsa
+          az_container_name: ghdeploytfstate
+          arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
+          arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}
+          arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+##### APPLY DEPLOY #####
+  Apply_Dev_Deploy:
+    needs: Plan_Dev_Deploy
+    runs-on: ubuntu-latest
+    environment: Development    
+    steps:
+      - name: Dev TF Deploy
+        if: ${{ github.actor != 'dependabot[bot]' }}
+        uses: Pwd9000-ML/terraform-azurerm-apply@v1.2.0
+        with:
+          plan_mode: deploy
+          tf_version: latest
+          tf_key: brainboard-demo
+          az_resource_group: TF-Core-Rg
+          az_storage_acc: tfcorebackendsa
+          az_container_name: ghdeploytfstate
+          arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
+          arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}
+          arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}
