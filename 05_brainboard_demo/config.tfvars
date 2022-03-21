@@ -3,7 +3,7 @@ global_settings = {
   regions = {
     region1 = "uksouth"
   }
-  prefixes = "demo"
+  prefixes = ["demo"]
   resource_defaults = {
     virtual_machines = {
       use_azmanaged_storage_for_boot_diagnostics = true
