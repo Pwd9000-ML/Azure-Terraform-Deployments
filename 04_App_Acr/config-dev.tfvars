@@ -5,22 +5,27 @@ location            = "UKSouth"
 #VNET
 vnet_name          = "Demo-Inf-Dev-Vnet"
 vnet_address_space = ["10.2.0.0/16"]
-vnet_subnets = [
+subnets_delegated = [
   {
-    address_prefix = "10.2.0.0/24"
-    name           = "Subnet1"
+    subnet_name              = "Subnet0"
+    subnet_address_prefixes  = ["10.2.0.0/24"]
+    subnet_service_endpoints = null
+    subnet_delegation_name   = null
+    subnet_service_name      = null
+    subnet_service_acions    = null
   },
   {
-    address_prefix = "10.2.1.0/24"
-    name           = "Subnet2"
-  }
-]
-
-subnets_delegated = [
+    subnet_name              = "Subnet1"
+    subnet_address_prefixes  = ["10.2.1.0/24"]
+    subnet_service_endpoints = null
+    subnet_delegation_name   = null
+    subnet_service_name      = null
+    subnet_service_acions    = null
+  },
   {
     subnet_name              = "App-Service-Integration-Subnet"
     subnet_address_prefixes  = ["10.2.2.0/27"]
-    subnet_service_endpoints = [""]
+    subnet_service_endpoints = null
     subnet_delegation_name   = "delegated-appservice"
     subnet_service_name      = "Microsoft.Web/serverFarms"
     subnet_service_acions = [
