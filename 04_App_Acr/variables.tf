@@ -72,15 +72,15 @@ variable "appsvc_settings" {
 }
 
 variable "vnet_route_all_enabled" {
-  type = bool
+  type        = bool
   description = "Specifies if VNET route all is enabled or not."
-  default = false
+  default     = false
 }
 
 variable "vnet_integ_required" {
-  type = bool
+  type        = bool
   description = "Specifies if VNET integration is required or not."
-  default = false
+  default     = false
 }
 
 #ACR

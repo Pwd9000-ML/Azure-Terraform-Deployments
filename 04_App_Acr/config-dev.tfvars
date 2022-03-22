@@ -56,7 +56,7 @@ appsvc_settings = {
   sensitive_key2                 = "P@ssw0rd02"
 }
 vnet_route_all_enabled = true
-vnet_integ_required = true
+vnet_integ_required    = true
 
 
 #ACR
