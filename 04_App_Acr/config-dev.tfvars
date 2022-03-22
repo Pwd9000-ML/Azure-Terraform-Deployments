@@ -55,6 +55,9 @@ appsvc_settings = {
   sensitive_key1                 = "P@ssw0rd01"
   sensitive_key2                 = "P@ssw0rd02"
 }
+vnet_route_all_enabled = true
+vnet_integ_required = true
+
 
 #ACR
 acr_name = "demoinfdevacr"

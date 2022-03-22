@@ -71,6 +71,18 @@ variable "appsvc_settings" {
   sensitive   = true
 }
 
+variable "vnet_route_all_enabled" {
+  type = bool
+  description = "Specifies if VNET route all is enabled or not."
+  default = false
+}
+
+variable "vnet_integ_required" {
+  type = bool
+  description = "Specifies if VNET integration is required or not."
+  default = false
+}
+
 #ACR
 variable "acr_name" {
   type        = string

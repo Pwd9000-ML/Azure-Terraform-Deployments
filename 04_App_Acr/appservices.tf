@@ -39,8 +39,15 @@ resource "azurerm_app_service" "APPSVC" {
     acr_use_managed_identity_credentials = true
     ftps_state                           = "FtpsOnly"
     linux_fx_version                     = var.asp_kind == "linux" ? local.linux_fx_version : null
+    vnet_route_all_enabled               = var.vnet_route_all_enabled
   }
 
   app_settings = lookup(local.app_settings, "linux_app_settings", null)
   #app_settings = var.appsvc_settings
+}
+
+resource "azurerm_app_service_virtual_network_swift_connection" "azure_vnet_connection" {
+  count          = var.vnet_integ_required == true ? 1 : 0
+  app_service_id = azurerm_app_service.APPSVC.id
+  subnet_id      = azurerm_subnet.SUBNETS["App-Service-Integration-Subnet"].id
 }
