@@ -16,6 +16,22 @@ vnet_subnets = [
   }
 ]
 
+subnets_delegated = [
+  {
+    subnet_name              = "App-Service-Integration-Subnet"
+    subnet_address_prefixes  = ["10.2.2.0/27"]
+    subnet_service_endpoints = [""]
+    subnet_delegation_name   = "delegated-appservice"
+    subnet_service_name      = "Microsoft.Web/serverFarms"
+    subnet_service_acions = [
+      "Microsoft.Network/virtualNetworks/subnets/action",
+      "Microsoft.Network/virtualNetworks/subnets/join/action",
+      "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action",
+      "Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action"
+    ]
+  }
+]
+
 #ASP
 asp_name = "demo-inf-dev-asp"
 asp_kind = "linux"

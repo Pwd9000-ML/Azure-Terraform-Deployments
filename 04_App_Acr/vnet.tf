@@ -18,3 +18,21 @@ resource "azurerm_virtual_network" "VNET" {
   }
 
 }
+
+resource "azurerm_subnet" "SUBNETS" {
+  count                = length(var.subnets_delegated)
+  resource_group_name  = azurerm_resource_group.RG.name
+  name                 = var.subnets_delegated[count.index].subnet_name
+  virtual_network_name = azurerm_virtual_network.VNET.name
+  address_prefixes     = var.subnets_delegated[count.index].subnet_address_prefixes
+  service_endpoints    = var.subnets_delegated[count.index].subnet_service_endpoints
+
+  delegation {
+    name = var.subnets_delegated[count.index].subnet_delegation_name
+
+    service_delegation {
+      name    = var.subnets_delegated[count.index].subnet_service_name
+      actions = var.subnets_delegated[count.index].subnet_service_acions
+    }
+  }
+}
