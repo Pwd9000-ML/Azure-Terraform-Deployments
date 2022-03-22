@@ -31,14 +31,6 @@ variable "vnet_subnets" {
 }
 
 variable "subnets_delegated" {
-  type = list(object({
-    subnet_name              = string
-    subnet_address_prefixes  = list(string)
-    subnet_service_endpoints = list(string)
-    subnet_delegation_name   = string
-    subnet_service_name      = string
-    subnet_service_acions    = list(string)
-  }))
   description = "Specifies a list of delegated subnet objects (if any required) of the virtual network that will be created."
   default     = []
 }
