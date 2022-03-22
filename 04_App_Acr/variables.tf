@@ -31,7 +31,7 @@ variable "vnet_subnets" {
 }
 
 variable "subnets_delegated" {
-  description = "Specifies a list of delegated subnet objects (if any required) of the virtual network that will be created."
+  description = "Specifies a list of delegated subnet objects (if any are required) of the virtual network that will be created."
   default     = []
 }
 
