@@ -20,7 +20,7 @@ resource "azurerm_virtual_network" "VNET" {
 }
 
 resource "azurerm_subnet" "SUBNETS" {
-  for_each             = { for s in var.subnets_delegated : s.subnet_name => n }
+  for_each             = { for s in var.subnets_delegated : s.subnet_name => s }
   resource_group_name  = azurerm_resource_group.RG.name
   name                 = each.value.subnet_name
   virtual_network_name = azurerm_virtual_network.VNET.name
