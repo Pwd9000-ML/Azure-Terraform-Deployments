@@ -10,6 +10,26 @@ variable "location" {
   default     = "uksouth"
 }
 
+#VNET
+variable "vnet_name" {
+  type        = string
+  description = "Specifies the name of the virtual network that will be created."
+}
+
+variable "vnet_address_space" {
+  type        = list(string)
+  description = "Specifies the address space of the virtual network that will be created."
+}
+
+variable "vnet_subnets" {
+  type = list(object({
+    name           = string
+    address_prefix = string
+  }))
+  description = "Specifies a list of subnet objects of the virtual network that will be created."
+  default     = []
+}
+
 #ASP
 variable "asp_name" {
   type        = string
