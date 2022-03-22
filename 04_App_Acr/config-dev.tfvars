@@ -28,7 +28,7 @@ subnets_delegated = [
         service = [
           {
             service_name = "Microsoft.Web/serverFarms"
-            service_acions = [
+            service_actions = [
               "Microsoft.Network/virtualNetworks/subnets/action",
               "Microsoft.Network/virtualNetworks/subnets/join/action",
               "Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action",
