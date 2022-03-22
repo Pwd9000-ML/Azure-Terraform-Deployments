@@ -5,7 +5,7 @@ location            = "UKSouth"
 #VNET
 vnet_name          = "Demo-Inf-Dev-Vnet"
 vnet_address_space = ["10.2.0.0/16"]
-subnets = [
+subnets_delegated = [
   {
     subnet_name              = "Subnet0"
     subnet_address_prefixes  = ["10.2.0.0/24"]
