@@ -37,9 +37,10 @@ resource "azurerm_subnet" "SUBNETS" {
   }
 }
 
+#Get subnet name from ID: element(split("/", "/subs/xxxx/name"), length(split("/", "/subs/xxxx/name"))-1)
 resource "azurerm_network_security_group" "NSG" {
   count               = length(azurerm_virtual_network.VNET.subnet.*.id)
-  name                = "${azurerm_virtual_network.VNET.subnet[count.index]}-nsg"
+  name                = "${element(split("/", azurerm_virtual_network.VNET.subnet[count.index].id), length(split("/", azurerm_virtual_network.VNET.subnet[count.index].id)) - 1)}-nsg"
   location            = azurerm_resource_group.RG.location
   resource_group_name = azurerm_resource_group.RG.name
   depends_on          = [azurerm_subnet.SUBNETS]
