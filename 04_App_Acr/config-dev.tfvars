@@ -8,18 +8,21 @@ vnet_address_space = ["10.2.0.0/16"]
 subnets_delegated = [
   {
     subnet_name              = "Subnet0"
+    nsg_name                 = "Subnet0-nsg"
     subnet_address_prefixes  = ["10.2.0.0/24"]
     subnet_service_endpoints = [""]
     delegation               = []
   },
   {
     subnet_name              = "Subnet1"
+    nsg_name                 = "Subnet1-nsg"
     subnet_address_prefixes  = ["10.2.1.0/24"]
     subnet_service_endpoints = [""]
     delegation               = []
   },
   {
     subnet_name              = "App-Service-Integration-Subnet"
+    nsg_name                 = "App-Service-Integration-Subnet-nsg"
     subnet_address_prefixes  = ["10.2.2.0/27"]
     subnet_service_endpoints = [""]
     delegation = [
