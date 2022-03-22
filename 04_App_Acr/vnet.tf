@@ -39,15 +39,15 @@ resource "azurerm_subnet" "SUBNETS" {
 
 #Get subnet name from ID: element(split("/", "/subs/xxxx/name"), length(split("/", "/subs/xxxx/name"))-1)
 resource "azurerm_network_security_group" "NSG" {
-  count               = length(azurerm_virtual_network.VNET.subnet)
-  name                = "${element(split("/", azurerm_virtual_network.VNET.subnet[count.index].id), length(split("/", azurerm_virtual_network.VNET.subnet[count.index].id)) - 1)}-nsg"
+  count               = length(azurerm_virtual_network.VNET.subnet.*.id)
+  name                = "${element(split("/", azurerm_virtual_network.VNET.subnet.*.id[count.index]), length(split("/", azurerm_virtual_network.VNET.subnet.*.id[count.index])) - 1)}-nsg"
   location            = azurerm_resource_group.RG.location
   resource_group_name = azurerm_resource_group.RG.name
   depends_on          = [azurerm_subnet.SUBNETS, azurerm_virtual_network.VNET]
 }
 
 resource "azurerm_subnet_network_security_group_association" "nsg_subnet_assoc" {
-  count                     = length(azurerm_virtual_network.VNET.subnet)
-  subnet_id                 = azurerm_virtual_network.VNET.subnet[count.index].id
-  network_security_group_id = azurerm_network_security_group.NSG[count.index].id
+  count                     = length(azurerm_virtual_network.VNET.subnet.*.id)
+  subnet_id                 = azurerm_virtual_network.VNET.subnet.*.id[count.index]
+  network_security_group_id = azurerm_network_security_group.NSG.*.id[count.index]
 }
