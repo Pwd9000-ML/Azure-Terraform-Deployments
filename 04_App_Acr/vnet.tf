@@ -45,7 +45,7 @@ resource "azurerm_subnet" "SUBNETS" {
 #Get subnet name from ID: element(split("/", "/subs/xxxx/name"), length(split("/", "/subs/xxxx/name"))-1)
 resource "azurerm_network_security_group" "NSG" {
   for_each            = { for s in var.subnets_delegated : s.subnet_name => s }
-  name                = each.value.nsg_name
+  name                = "${each.value.subnet_name}-nsg"
   location            = azurerm_resource_group.RG.location
   resource_group_name = azurerm_resource_group.RG.name
 }
