@@ -44,15 +44,15 @@ resource "azurerm_subnet" "SUBNETS" {
 
 #Get subnet name from ID: element(split("/", "/subs/xxxx/name"), length(split("/", "/subs/xxxx/name"))-1)
 resource "azurerm_network_security_group" "NSG" {
-  count               = length(azurerm_subnet.SUBNETS)
-  name                = "${azurerm_subnet.SUBNETS[count.index].name}-nsg"
+  for_each             = { for s in var.subnets_delegated : s.subnet_name => s }
+  name                = "${each.value.subnet_name}-nsg"
   location            = azurerm_resource_group.RG.location
   resource_group_name = azurerm_resource_group.RG.name
-  #depends_on          = [azurerm_subnet.SUBNETS, azurerm_virtual_network.VNET]
+  depends_on          = [azurerm_subnet.SUBNETS]
 }
 
 resource "azurerm_subnet_network_security_group_association" "nsg_subnet_assoc" {
-  count                     = length(azurerm_subnet.SUBNETS)
-  subnet_id                 = azurerm_subnet.SUBNETS[count.index].id
-  network_security_group_id = azurerm_network_security_group.NSG[count.index].id
+  for_each                  = { for s in var.subnets_delegated : s.subnet_name => s }
+  subnet_id                 = azurerm_subnet.SUBNETS[each.value.subnet_name].id
+  network_security_group_id = azurerm_network_security_group.NSG["${each.value.subnet_name}-nsg"].id
 }
