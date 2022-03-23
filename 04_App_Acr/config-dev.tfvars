@@ -21,7 +21,7 @@ subnets_delegated = [
   {
     subnet_name              = "App-Service-Integration-Subnet"
     subnet_address_prefixes  = ["10.2.2.0/27"]
-    subnet_service_endpoints = [""]
+    subnet_service_endpoints = ["Microsoft.ContainerRegistry"]
     delegation = [
       {
         delegation_name = "delegated-appservice"
