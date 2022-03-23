@@ -23,7 +23,7 @@ jobs:
           tf_version: latest
           tf_vars_file: config-dev.tfvars
           tf_key: app-acr-dev
-          enable_TFSEC: true
+          enable_TFSEC: false
           az_resource_group: TF-Core-Rg
           az_storage_acc: tfcorebackendsa
           az_container_name: ghdeploytfstate
