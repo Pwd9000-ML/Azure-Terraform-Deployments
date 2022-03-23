@@ -62,4 +62,4 @@ vnet_integ_required    = true
 #ACR
 acr_name            = "demoinfdevacr"
 acr_sku             = "Premium"
-acr_custom_fw_rules = ["1.2.3.4/24", "2.3.4.5"]
+acr_custom_fw_rules = ["192.168.0.0/24", "8.8.8.8"]
