@@ -89,7 +89,7 @@ variable "acr_name" {
   description = "Specifies the container registry name to be created."
 }
 
-variable "admin_enabled" {
+variable "acr_admin_enabled" {
   type        = bool
   description = "Specifies whether the ACR admin account should be enabled or not."
   default     = false
