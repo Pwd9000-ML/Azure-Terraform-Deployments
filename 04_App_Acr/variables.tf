@@ -88,3 +88,35 @@ variable "acr_name" {
   type        = string
   description = "Specifies the container registry name to be created."
 }
+
+variable "admin_enabled" {
+  type        = bool
+  description = "Specifies whether the ACR admin account should be enabled or not."
+  default     = false
+}
+
+variable "acr_sku" {
+  type        = string
+  description = "Specifies the ACR SKU."
+  default     = "Standard"
+}
+
+variable "acr_requires_identity" {
+  type        = bool
+  description = "Specifies whether the ACR requires a system assigned managed identity."
+  default     = true
+}
+
+variable "acr_georeplications_configuration" {
+  type = list(object({
+    location                = string
+    zone_redundancy_enabled = bool
+  }))
+  default = []
+}
+
+variable "acr_custom_fw_rules" {
+  type        = list(string)
+  description = "Specifies a list of custom IPs or CIDR ranges to whitelist on the ACR."
+  default     = null
+}
