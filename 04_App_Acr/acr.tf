@@ -42,7 +42,6 @@ resource "azurerm_container_registry" "ACR" {
     }
   }
 
-  depends_on = [azurerm_app_service_virtual_network_swift_connection.azure_vnet_connection]
 }
 
 ## Give App service Identity ACRPull access
