@@ -9,13 +9,13 @@ subnets_delegated = [
   {
     subnet_name              = "Subnet0"
     subnet_address_prefixes  = ["10.2.0.0/24"]
-    subnet_service_endpoints = [""]
+    subnet_service_endpoints = []
     delegation               = []
   },
   {
     subnet_name              = "Subnet1"
     subnet_address_prefixes  = ["10.2.1.0/24"]
-    subnet_service_endpoints = [""]
+    subnet_service_endpoints = []
     delegation               = []
   },
   {
@@ -43,7 +43,6 @@ subnets_delegated = [
 
 #ASP
 asp_name = "demo-inf-dev-asp"
-asp_kind = "linux"
 
 #INSIGHTS
 app_insights_name = "demo-inf-dev-insights"
@@ -57,7 +56,6 @@ appsvc_settings = {
 }
 vnet_route_all_enabled = true
 vnet_integ_required    = true
-
 
 #ACR
 acr_name            = "demoinfdevacr"

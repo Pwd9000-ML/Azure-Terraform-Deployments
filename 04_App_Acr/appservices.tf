@@ -1,14 +1,9 @@
-resource "azurerm_app_service_plan" "ASP" {
+resource "azurerm_service_plan" "ASP" {
   name                = var.asp_name
   location            = azurerm_resource_group.RG.location
   resource_group_name = azurerm_resource_group.RG.name
-  kind                = var.asp_kind
-  reserved            = var.asp_kind == "linux" ? true : false
-
-  sku {
-    tier = "Standard"
-    size = "S1"
-  }
+  os_type             = var.asp_os_type
+  sku_name            = var.asp_sku_name
 }
 
 resource "azurerm_application_insights" "INSIGHTS" {
@@ -24,11 +19,11 @@ output "insights_key" {
   sensitive = true
 }
 
-resource "azurerm_app_service" "APPSVC" {
+resource "azurerm_linux_web_app" "APPSVC" {
   name                = var.appsvc_name
   location            = azurerm_resource_group.RG.location
   resource_group_name = azurerm_resource_group.RG.name
-  app_service_plan_id = azurerm_app_service_plan.ASP.id
+  service_plan_id     = azurerm_service_plan.ASP.id
   https_only          = true
 
   identity {
@@ -36,10 +31,13 @@ resource "azurerm_app_service" "APPSVC" {
   }
 
   site_config {
-    acr_use_managed_identity_credentials = true
-    ftps_state                           = "FtpsOnly"
-    linux_fx_version                     = var.asp_kind == "linux" ? local.linux_fx_version : null
-    vnet_route_all_enabled               = var.vnet_route_all_enabled
+    container_registry_use_managed_identity = true
+    ftps_state                              = "FtpsOnly"
+    application_stack {
+      docker_image     = "${var.acr_name}.azurecr.io/${var.appsvc_name}"
+      docker_image_tag = "latest"
+    }
+    vnet_route_all_enabled = var.vnet_route_all_enabled
   }
 
   app_settings = lookup(local.app_settings, "linux_app_settings", null)
@@ -48,6 +46,6 @@ resource "azurerm_app_service" "APPSVC" {
 
 resource "azurerm_app_service_virtual_network_swift_connection" "azure_vnet_connection" {
   count          = var.vnet_integ_required == true ? 1 : 0
-  app_service_id = azurerm_app_service.APPSVC.id
+  app_service_id = azurerm_linux_web_app.APPSVC.id
   subnet_id      = azurerm_subnet.SUBNETS["App-Service-Integration-Subnet"].id
 }
