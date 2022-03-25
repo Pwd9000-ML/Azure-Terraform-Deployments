@@ -57,7 +57,6 @@ appsvc_settings = {
 vnet_route_all_enabled = true
 vnet_integ_required    = true
 
-
 #ACR
 acr_name            = "demoinfdevacr"
 acr_sku             = "Premium"
