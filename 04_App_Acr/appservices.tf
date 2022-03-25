@@ -1,14 +1,9 @@
-resource "azurerm_app_service_plan" "ASP" {
+resource "azurerm_service_plan" "ASP" {
   name                = var.asp_name
   location            = azurerm_resource_group.RG.location
   resource_group_name = azurerm_resource_group.RG.name
-  kind                = var.asp_kind
-  reserved            = var.asp_kind == "linux" ? true : false
-
-  sku {
-    tier = "Standard"
-    size = "S1"
-  }
+  os_type             = var.asp_os_type
+  sku_name            = var.asp_sku_name
 }
 
 resource "azurerm_application_insights" "INSIGHTS" {
