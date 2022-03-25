@@ -33,7 +33,7 @@ resource "azurerm_app_service" "APPSVC" {
   site_config {
     acr_use_managed_identity_credentials = true
     ftps_state                           = "FtpsOnly"
-    linux_fx_version                     = var.asp_kind == "linux" ? local.linux_fx_version : null
+    linux_fx_version                     = var.asp_os_type == "Linux" ? local.linux_fx_version : null
     vnet_route_all_enabled               = var.vnet_route_all_enabled
   }
 
