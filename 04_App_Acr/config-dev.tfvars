@@ -9,13 +9,13 @@ subnets_delegated = [
   {
     subnet_name              = "Subnet0"
     subnet_address_prefixes  = ["10.2.0.0/24"]
-    subnet_service_endpoints = [""]
+    subnet_service_endpoints = []
     delegation               = []
   },
   {
     subnet_name              = "Subnet1"
     subnet_address_prefixes  = ["10.2.1.0/24"]
-    subnet_service_endpoints = [""]
+    subnet_service_endpoints = []
     delegation               = []
   },
   {
