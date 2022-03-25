@@ -44,13 +44,13 @@ variable "asp_name" {
 variable "asp_os_type" {
   type        = string
   description = "(Optional) The O/S type for the App Services to be hosted in this plan. Possible values include `Windows`, `Linux`, and `WindowsContainer`"
-  default = "Linux"
+  default     = "Linux"
 }
 
 variable "asp_sku_name" {
   type        = string
   description = "(Optional) The SKU for the plan. Possible values include `B1`, `B2`, `B3`, `D1`, `F1`, `FREE`, `I1`, `I2`, `I3`, `I1v2`, `I2v2`, `I3v2`, `P1v2`, `P2v2`, `P3v2`, `P1v3`, `P2v3`, `P3v3`, `S1`, `S2`, `S3`, `SHARED`, `EP1`, `EP2`, `EP3`, `WS1`, `WS2`, and `WS3`."
-  default = "S1"
+  default     = "S1"
 }
 
 #INSIGHTS
