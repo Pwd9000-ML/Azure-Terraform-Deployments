@@ -43,7 +43,6 @@ subnets_delegated = [
 
 #ASP
 asp_name = "demo-inf-dev-asp"
-asp_kind = "linux"
 
 #INSIGHTS
 app_insights_name = "demo-inf-dev-insights"

@@ -19,11 +19,11 @@ output "insights_key" {
   sensitive = true
 }
 
-resource "azurerm_app_service" "APPSVC" {
+resource "azurerm_linux_web_app" "APPSVC" {
   name                = var.appsvc_name
   location            = azurerm_resource_group.RG.location
   resource_group_name = azurerm_resource_group.RG.name
-  app_service_plan_id = azurerm_service_plan.ASP.id
+  service_plan_id     = azurerm_service_plan.ASP.id
   https_only          = true
 
   identity {
@@ -31,18 +31,22 @@ resource "azurerm_app_service" "APPSVC" {
   }
 
   site_config {
-    acr_use_managed_identity_credentials = true
-    ftps_state                           = "FtpsOnly"
-    linux_fx_version                     = var.asp_os_type == "Linux" ? local.linux_fx_version : null
-    vnet_route_all_enabled               = var.vnet_route_all_enabled
+    container_registry_use_managed_identity = true
+    ftps_state                              = "FtpsOnly"
+    application_stack {
+      docker_image      = "${var.acr_name}/${var.appsvc_name}"
+      docker_image_tage = "latest"
+    }
+    #linux_fx_version                     = var.asp_os_type == "Linux" ? local.linux_fx_version : null
+    vnet_route_all_enabled = var.vnet_route_all_enabled
   }
 
   app_settings = lookup(local.app_settings, "linux_app_settings", null)
   #app_settings = var.appsvc_settings
 }
 
-resource "azurerm_app_service_virtual_network_swift_connection" "azure_vnet_connection" {
+resource "azurerm_linux_web_app_virtual_network_swift_connection" "azure_vnet_connection" {
   count          = var.vnet_integ_required == true ? 1 : 0
-  app_service_id = azurerm_app_service.APPSVC.id
+  app_service_id = azurerm_linux_web_app.APPSVC.id
   subnet_id      = azurerm_subnet.SUBNETS["App-Service-Integration-Subnet"].id
 }
