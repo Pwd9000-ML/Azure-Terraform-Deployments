@@ -127,3 +127,9 @@ variable "acr_custom_fw_rules" {
   description = "Specifies a list of custom IPs or CIDR ranges to whitelist on the ACR."
   default     = null
 }
+
+variable "acr_network_rule_set_default_action" {
+  type        = string
+  description = "Specifies the default network rule set action."
+  default     = "Deny"
+}
