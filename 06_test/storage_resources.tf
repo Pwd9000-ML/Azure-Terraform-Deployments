@@ -28,14 +28,14 @@ data "azurerm_subnet" "data_subnet" {
 
 resource "azurerm_private_endpoint" "SASPE" {
   for_each            = toset([for pe in var.storage_config : pe.name if pe.requires_private_endpoint == true])
-  name                = "${each.value.name}-pe"
+  name                = "${each.value}-pe"
   location            = azurerm_resource_group.RG.location
   resource_group_name = azurerm_resource_group.RG.name
   subnet_id           = data.azurerm_subnet.data_subnet.id
 
   private_service_connection {
-    name                           = "${each.value.name}-pe-sc"
-    private_connection_resource_id = azurerm_storage_account.SAS[each.value.name].id
+    name                           = "${each.value}-pe-sc"
+    private_connection_resource_id = azurerm_storage_account.SAS[each.value].id
     is_manual_connection           = false
   }
 }
