@@ -37,5 +37,6 @@ resource "azurerm_private_endpoint" "SASPE" {
     name                           = "${each.value}-pe-sc"
     private_connection_resource_id = azurerm_storage_account.SAS[each.value].id
     is_manual_connection           = false
+    subresource_names              = ["blob", "dfs"]
   }
 }
