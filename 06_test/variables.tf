@@ -1,3 +1,5 @@
+## variables ##
+
 variable "storage_config" {
   type = list(object({
     name                      = string
@@ -10,7 +12,7 @@ variable "storage_config" {
     requires_private_endpoint = bool
   }))
   default = [
-    #V2 Storage without private endpoint
+    #V2 Storage (hot) without private endpoint
     {
       name                      = "pwd9000v2sa001"
       account_kind              = "StorageV2"
@@ -21,7 +23,7 @@ variable "storage_config" {
       is_hns_enabled            = false
       requires_private_endpoint = false
     },
-    #V2 Storage with private endpoint
+    #V2 Storage (cool) without private endpoint
     {
       name                      = "pwd9000v2sa002"
       account_kind              = "StorageV2"
@@ -30,7 +32,7 @@ variable "storage_config" {
       enable_https_traffic_only = true
       access_tier               = "Cool"
       is_hns_enabled            = false
-      requires_private_endpoint = true
+      requires_private_endpoint = false
     },
     #ADLS2 Storage with private endpoint
     {
@@ -42,6 +44,17 @@ variable "storage_config" {
       access_tier               = "Hot"
       is_hns_enabled            = true
       requires_private_endpoint = true
+    },
+    #ADLS2 Storage without private endpoint
+    {
+      name                      = "pwd9000adls2sa002"
+      account_kind              = "BlockBlobStorage"
+      account_tier              = "Premium"
+      account_replication_type  = "ZRS"
+      enable_https_traffic_only = false
+      access_tier               = "Hot"
+      is_hns_enabled            = true
+      requires_private_endpoint = false
     }
   ]
 }
