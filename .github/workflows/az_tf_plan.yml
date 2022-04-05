@@ -93,7 +93,7 @@ jobs:
           sarif_file: tfsec.sarif  
 
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1.3.2
+        uses: hashicorp/setup-terraform@v1.4.0
         with:
           terraform_version: ${{ inputs.tf_version }}
 
