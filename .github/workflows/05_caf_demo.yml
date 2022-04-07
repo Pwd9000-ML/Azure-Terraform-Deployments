@@ -21,9 +21,9 @@ jobs:
           tf_vars_file: caf-config-dev.tfvars
           tf_key: caf-demo-dev
           enable_TFSEC: false
-          az_resource_group: TF-Core-Rg
-          az_storage_acc: tfcorebackendsa
-          az_container_name: ghdeploytfstate
+          az_resource_group: Terraform-GitHub-Backend
+          az_storage_acc: tfgithubbackendsa
+          az_container_name: gh-terraform-deployments
           arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
           arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}
           arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
@@ -43,9 +43,9 @@ jobs:
           plan_mode: deploy
           tf_version: latest
           tf_key: caf-demo-dev
-          az_resource_group: TF-Core-Rg
-          az_storage_acc: tfcorebackendsa
-          az_container_name: ghdeploytfstate
+          az_resource_group: Terraform-GitHub-Backend
+          az_storage_acc: tfgithubbackendsa
+          az_container_name: gh-terraform-deployments
           arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
           arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}
           arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}

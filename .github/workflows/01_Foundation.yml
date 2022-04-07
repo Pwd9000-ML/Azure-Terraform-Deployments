@@ -8,9 +8,9 @@ jobs:
     with:
       path: 01_Foundation                ## Path to terraform root module (Required)
       tf_version: latest                 ## Terraform version e.g: 1.1.0 Default=latest (Optional)
-      az_resource_group: TF-Core-Rg      ## AZ backend - AZURE Resource Group hosting terraform backend storage acc (Required)
-      az_storage_acc: tfcorebackendsa    ## AZ backend - AZURE terraform backend storage acc (Required)
-      az_container_name: ghdeploytfstate ## AZ backend - AZURE storage container hosting state files (Required)
+      az_resource_group: Terraform-GitHub-Backend      ## AZ backend - AZURE Resource Group hosting terraform backend storage acc (Required)
+      az_storage_acc: tfgithubbackendsa    ## AZ backend - AZURE terraform backend storage acc (Required)
+      az_container_name: gh-terraform-deployments ## AZ backend - AZURE storage container hosting state files (Required)
       tf_key: foundation-dev             ## AZ backend - Specifies name that will be given to terraform state file and plan artifact (Required)
       tf_vars_file: config-dev.tfvars    ## Terraform TFVARS (Required)
       enable_TFSEC: true                 ## (Optional)  Enable TFSEC IaC scans (Private repo requires GitHub enterprise)
@@ -26,9 +26,9 @@ jobs:
     with:
       path: 01_Foundation                ## Path to terraform root module (Required)
       tf_version: latest                 ## Terraform version e.g: 1.1.0 Default=latest (Optional)
-      az_resource_group: TF-Core-Rg      ## AZ backend - AZURE Resource Group hosting terraform backend storage acc (Required)
-      az_storage_acc: tfcorebackendsa    ## AZ backend - AZURE terraform backend storage acc (Required)
-      az_container_name: ghdeploytfstate ## AZ backend - AZURE storage container hosting state files (Required)
+      az_resource_group: Terraform-GitHub-Backend      ## AZ backend - AZURE Resource Group hosting terraform backend storage acc (Required)
+      az_storage_acc: tfgithubbackendsa    ## AZ backend - AZURE terraform backend storage acc (Required)
+      az_container_name: gh-terraform-deployments ## AZ backend - AZURE storage container hosting state files (Required)
       tf_key: foundation-dev             ## AZ backend - Specifies name of the terraform state file and workflow artifact to download (Required)
       gh_environment: Development        ## GH Environment. Default=null - (Optional)
     secrets:
@@ -41,9 +41,9 @@ jobs:
     uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_plan.yml@master
     with:
       path: 01_Foundation
-      az_resource_group: TF-Core-Rg
-      az_storage_acc: tfcorebackendsa
-      az_container_name: ghdeploytfstate
+      az_resource_group: Terraform-GitHub-Backend
+      az_storage_acc: tfgithubbackendsa
+      az_container_name: gh-terraform-deployments
       tf_key: foundation-uat
       tf_vars_file: config-uat.tfvars
       enable_TFSEC: true                       
@@ -58,9 +58,9 @@ jobs:
     uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_apply.yml@master
     with:
       path: 01_Foundation
-      az_resource_group: TF-Core-Rg
-      az_storage_acc: tfcorebackendsa
-      az_container_name: ghdeploytfstate
+      az_resource_group: Terraform-GitHub-Backend
+      az_storage_acc: tfgithubbackendsa
+      az_container_name: gh-terraform-deployments
       tf_key: foundation-uat
       gh_environment: UserAcceptanceTesting
     secrets:
@@ -74,9 +74,9 @@ jobs:
     with:
       path: 01_Foundation
       tf_version: latest
-      az_resource_group: TF-Core-Rg
-      az_storage_acc: tfcorebackendsa
-      az_container_name: ghdeploytfstate
+      az_resource_group: Terraform-GitHub-Backend
+      az_storage_acc: tfgithubbackendsa
+      az_container_name: gh-terraform-deployments
       tf_key: foundation-prod
       tf_vars_file: config-prod.tfvars
       enable_TFSEC: true                          
@@ -91,9 +91,9 @@ jobs:
     uses: Pwd9000-ML/Azure-Terraform-Deployments/.github/workflows/az_tf_apply.yml@master
     with:
       path: 01_Foundation
-      az_resource_group: TF-Core-Rg
-      az_storage_acc: tfcorebackendsa
-      az_container_name: ghdeploytfstate
+      az_resource_group: Terraform-GitHub-Backend
+      az_storage_acc: tfgithubbackendsa
+      az_container_name: gh-terraform-deployments
       tf_key: foundation-prod
       gh_environment: Production
     secrets:

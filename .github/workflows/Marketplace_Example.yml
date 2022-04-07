@@ -28,9 +28,9 @@ jobs:
           tf_vars_file: config-dev.tfvars      ## (Required) Specifies Terraform TFVARS file name inside module path.
           tf_key: foundation-dev               ## (Required) AZ backend - Specifies name that will be given to terraform state file and plan artifact
           enable_TFSEC: true                   ## (Optional) Enable TFSEC IaC scans (Private repo requires GitHub enterprise). Default=false
-          az_resource_group: TF-Core-Rg        ## (Required) AZ backend - AZURE Resource Group hosting terraform backend storage acc 
-          az_storage_acc: tfcorebackendsa      ## (Required) AZ backend - AZURE terraform backend storage acc 
-          az_container_name: ghdeploytfstate   ## (Required) AZ backend - AZURE storage container hosting state files 
+          az_resource_group: Terraform-GitHub-Backend        ## (Required) AZ backend - AZURE Resource Group hosting terraform backend storage acc 
+          az_storage_acc: tfgithubbackendsa      ## (Required) AZ backend - AZURE terraform backend storage acc 
+          az_container_name: gh-terraform-deployments   ## (Required) AZ backend - AZURE storage container hosting state files 
           arm_client_id: ${{ secrets.ARM_CLIENT_ID }}             ## (Required - Actions Secrets) ARM Client ID 
           arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}     ## (Required - Actions Secrets) ARM Client Secret
           arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }} ## (Required - Actions Secrets) ARM Subscription ID
@@ -50,9 +50,9 @@ jobs:
           plan_mode: deploy                  ## (Optional) Specify plan mode. Valid options are "deploy" or "destroy". Default="deploy"
           tf_version: latest                 ## (Optional) Specifies version of Terraform to use. e.g: 1.1.0 Default="latest"
           tf_key: foundation-dev             ## (Required) Specifies name of the terraform state file and plan artifact to download
-          az_resource_group: TF-Core-Rg      ## (Required) AZ backend - AZURE Resource Group hosting terraform backend storage acc 
-          az_storage_acc: tfcorebackendsa    ## (Required) AZ backend - AZURE terraform backend storage acc 
-          az_container_name: ghdeploytfstate ## (Required) AZ backend - AZURE storage container hosting state files 
+          az_resource_group: Terraform-GitHub-Backend      ## (Required) AZ backend - AZURE Resource Group hosting terraform backend storage acc 
+          az_storage_acc: tfgithubbackendsa    ## (Required) AZ backend - AZURE terraform backend storage acc 
+          az_container_name: gh-terraform-deployments ## (Required) AZ backend - AZURE storage container hosting state files 
           arm_client_id: ${{ secrets.ARM_CLIENT_ID }}             ## (Required - Actions Secrets) ARM Client ID 
           arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}     ## (Required - Actions Secrets) ARM Client Secret
           arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }} ## (Required - Actions Secrets) ARM Subscription ID
@@ -77,9 +77,9 @@ jobs:
           tf_vars_file: config-dev.tfvars    ## (Required) Specifies Terraform TFVARS file name inside module path.
           tf_key: foundation-dev             ## (Required) AZ backend - Specifies name that will be given to terraform state file and plan artifact
           enable_TFSEC: false                ## (Optional) Enable TFSEC IaC scans (Private repo requires GitHub enterprise). Default=false
-          az_resource_group: TF-Core-Rg      ## (Required) AZ backend - AZURE Resource Group hosting terraform backend storage acc 
-          az_storage_acc: tfcorebackendsa    ## (Required) AZ backend - AZURE terraform backend storage acc 
-          az_container_name: ghdeploytfstate ## (Required) AZ backend - AZURE storage container hosting state files 
+          az_resource_group: Terraform-GitHub-Backend      ## (Required) AZ backend - AZURE Resource Group hosting terraform backend storage acc 
+          az_storage_acc: tfgithubbackendsa    ## (Required) AZ backend - AZURE terraform backend storage acc 
+          az_container_name: gh-terraform-deployments ## (Required) AZ backend - AZURE storage container hosting state files 
           arm_client_id: ${{ secrets.ARM_CLIENT_ID }}             ## (Required - Actions Secrets) ARM Client ID 
           arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}     ## (Required - Actions Secrets) ARM Client Secret
           arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }} ## (Required - Actions Secrets) ARM Subscription ID
@@ -99,9 +99,9 @@ jobs:
           plan_mode: destroy                 ## (Optional) Specify plan mode. Valid options are "deploy" or "destroy". Default="deploy"
           tf_version: latest                 ## (Optional) Specifies version of Terraform to use. e.g: 1.1.0 Default="latest"
           tf_key: foundation-dev             ## (Required) Specifies name of the terraform state file and plan artifact to download
-          az_resource_group: TF-Core-Rg      ## (Required) AZ backend - AZURE Resource Group hosting terraform backend storage acc 
-          az_storage_acc: tfcorebackendsa    ## (Required) AZ backend - AZURE terraform backend storage acc 
-          az_container_name: ghdeploytfstate ## (Required) AZ backend - AZURE storage container hosting state files 
+          az_resource_group: Terraform-GitHub-Backend      ## (Required) AZ backend - AZURE Resource Group hosting terraform backend storage acc 
+          az_storage_acc: tfgithubbackendsa    ## (Required) AZ backend - AZURE terraform backend storage acc 
+          az_container_name: gh-terraform-deployments ## (Required) AZ backend - AZURE storage container hosting state files 
           arm_client_id: ${{ secrets.ARM_CLIENT_ID }}             ## (Required - Actions Secrets) ARM Client ID 
           arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}     ## (Required - Actions Secrets) ARM Client Secret
           arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }} ## (Required - Actions Secrets) ARM Subscription ID
