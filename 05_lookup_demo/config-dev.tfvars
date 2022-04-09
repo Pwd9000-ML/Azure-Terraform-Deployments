@@ -14,7 +14,7 @@ storage_config = [
     enable_https_traffic_only = true
     access_tier               = "Hot"
     is_hns_enabled            = false
-    site_name                 = "SiteA"
+    site_name                 = "siteA"
   },
   #ADLS2 Storage - SiteA
   {
@@ -25,7 +25,7 @@ storage_config = [
     enable_https_traffic_only = true
     access_tier               = "Hot"
     is_hns_enabled            = true
-    site_name                 = "SiteA"
+    site_name                 = "siteA"
   },
   #V2 Storage - SiteB
   {
@@ -36,6 +36,6 @@ storage_config = [
     enable_https_traffic_only = false
     access_tier               = "Hot"
     is_hns_enabled            = false
-    site_name                 = "SiteB"
+    site_name                 = "siteB"
   }
 ]

@@ -26,7 +26,7 @@ resource "azurerm_storage_account" "SAS" {
   #Lookup allowed ips
   network_rules {
     default_action = "Deny"
-    ip_rules       = lookup(local.site_configs["${each.value.site_name}"], "allowed_ips", null)
+    ip_rules       = lookup(local.site_configs[each.value.site_name], "allowed_ips", null)
   }
 }
 
