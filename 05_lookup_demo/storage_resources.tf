@@ -11,8 +11,8 @@ resource "azurerm_storage_account" "SAS" {
   for_each = { for n in var.storage_config : n.name => n }
 
   #Implicit dependency from previous resource
-  resource_group_name = azurerm_resource_group.RG[each.value.site_name].name
-  location            = azurerm_resource_group.RG[each.value.site_name].location
+  resource_group_name = azurerm_resource_group.RGS[each.value.site_name].name
+  location            = azurerm_resource_group.RGS[each.value.site_name].location
 
   #values from variable storage_config objects
   name                      = "${lower(each.value.name)}${random_integer.sa_num.result}"
