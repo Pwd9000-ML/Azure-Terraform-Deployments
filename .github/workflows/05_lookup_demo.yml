@@ -1,0 +1,101 @@
+name: "05_lookup_demo"
+on:
+  workflow_dispatch:
+
+jobs:
+##### PLAN A DEPLOYMENT #####
+  Plan_Dev_Deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor != 'dependabot[bot]' }}
+    environment: null        
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Dev TF Plan Deploy
+        uses: Pwd9000-ML/terraform-azurerm-plan@v1.2.1
+        with:
+          path: 05_lookup_demo
+          plan_mode: deploy
+          tf_version: latest
+          tf_vars_file: config-dev.tfvars
+          tf_key: lookup-demo-dev
+          enable_TFSEC: true
+          az_resource_group: Terraform-GitHub-Backend
+          az_storage_acc: tfgithubbackendsa
+          az_container_name: gh-terraform-deployments
+          arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
+          arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}
+          arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+##### APPLY DEPLOY #####
+  Apply_Dev_Deploy:
+    needs: Plan_Dev_Deploy
+    runs-on: ubuntu-latest
+    environment: Development    
+    steps:
+      - name: Dev TF Deploy
+        if: ${{ github.actor != 'dependabot[bot]' }}
+        uses: Pwd9000-ML/terraform-azurerm-apply@v1.2.0
+        with:
+          plan_mode: deploy
+          tf_version: latest
+          tf_key: lookup-demo-dev
+          az_resource_group: Terraform-GitHub-Backend
+          az_storage_acc: tfgithubbackendsa
+          az_container_name: gh-terraform-deployments
+          arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
+          arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}
+          arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}
+
+##### PLAN A DESTROY #####
+#  Plan_Dev_Destroy:
+#    needs: Apply_Dev_Deploy
+#    runs-on: ubuntu-latest
+#    if: ${{ github.actor != 'dependabot[bot]' }}
+#    environment: null        
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v3
+
+#      - name: Dev TF Plan Destroy
+#        uses: Pwd9000-ML/terraform-azurerm-plan@v1.2.1
+#        with:
+#          path: 05_lookup_demo
+#          plan_mode: destroy
+#          tf_version: latest
+#          tf_vars_file: config-dev.tfvars
+#          tf_key: lookup-demo-dev
+#          enable_TFSEC: false
+#          az_resource_group: Terraform-GitHub-Backend
+#          az_storage_acc: tfgithubbackendsa
+#          az_container_name: gh-terraform-deployments
+#          arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
+#          arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}
+#          arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+#          arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+##### APPLY DESTROY #####
+#  Apply_Dev_Destroy:
+#    needs: Plan_Dev_Destroy
+#    runs-on: ubuntu-latest
+#    environment: Development 
+#    steps:
+#      - name: Dev TF Destroy
+#        if: ${{ github.actor != 'dependabot[bot]' }}
+#        uses: Pwd9000-ML/terraform-azurerm-apply@v1.2.0
+#        with:
+#          plan_mode: destroy
+#          tf_version: latest
+#          tf_key: lookup-demo-dev
+#          az_resource_group: Terraform-GitHub-Backend
+#          az_storage_acc: tfgithubbackendsa
+#          az_container_name: gh-terraform-deployments
+#          arm_client_id: ${{ secrets.ARM_CLIENT_ID }}
+#          arm_client_secret: ${{ secrets.ARM_CLIENT_SECRET }}
+#          arm_subscription_id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+#          arm_tenant_id: ${{ secrets.ARM_TENANT_ID }}
