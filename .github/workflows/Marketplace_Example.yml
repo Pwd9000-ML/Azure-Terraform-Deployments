@@ -45,7 +45,7 @@ jobs:
     steps:
       - name: Dev TF Deploy
         if: ${{ github.actor != 'dependabot[bot]' }}
-        uses: Pwd9000-ML/terraform-azurerm-apply@v1.2.0
+        uses: Pwd9000-ML/terraform-azurerm-apply@v1.2.3
         with:
           plan_mode: deploy                  ## (Optional) Specify plan mode. Valid options are "deploy" or "destroy". Default="deploy"
           tf_version: latest                 ## (Optional) Specifies version of Terraform to use. e.g: 1.1.0 Default="latest"
@@ -94,7 +94,7 @@ jobs:
     steps:
       - name: Dev TF Destroy
         if: ${{ github.actor != 'dependabot[bot]' }}
-        uses: Pwd9000-ML/terraform-azurerm-apply@v1.2.0
+        uses: Pwd9000-ML/terraform-azurerm-apply@v1.2.3
         with:
           plan_mode: destroy                 ## (Optional) Specify plan mode. Valid options are "deploy" or "destroy". Default="deploy"
           tf_version: latest                 ## (Optional) Specifies version of Terraform to use. e.g: 1.1.0 Default="latest"
