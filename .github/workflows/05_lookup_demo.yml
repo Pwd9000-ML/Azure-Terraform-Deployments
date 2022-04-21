@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Dev TF Plan Deploy
-        uses: Pwd9000-ML/terraform-azurerm-plan@v1.2.1
+        uses: Pwd9000-ML/terraform-azurerm-plan@v1.2.3
         with:
           path: 05_lookup_demo
           plan_mode: deploy
@@ -62,7 +62,7 @@ jobs:
 #        uses: actions/checkout@v3
 
 #      - name: Dev TF Plan Destroy
-#        uses: Pwd9000-ML/terraform-azurerm-plan@v1.2.1
+#        uses: Pwd9000-ML/terraform-azurerm-plan@v1.2.3
 #        with:
 #          path: 05_lookup_demo
 #          plan_mode: destroy
