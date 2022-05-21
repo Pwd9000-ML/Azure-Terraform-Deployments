@@ -3,7 +3,7 @@ updates:
   - package-ecosystem: "github-actions" # search for actions - there are other options available
     directory: "/" # search in .github/workflows under root `/`
     schedule:
-      interval: "daily"
+      interval: "weekly"
 
   - package-ecosystem: "terraform" 
     directory: "/01_Foundation"
