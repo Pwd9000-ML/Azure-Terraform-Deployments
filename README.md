@@ -1,5 +1,7 @@
 # Azure-Terraform-Deployments
 
+[![Dependabot](https://badgen.net/badge/Dependabot/enabled/green?icon=dependabot)](https://dependabot.com/)  
+
 Template repository - Use to deploy Azure Resources using Terraform and **GitHub Reusable Workflows**.  
 
 There's also a demo workflow called: [Marketplace_Example.yml](https://github.com/Pwd9000-ML/Azure-Terraform-Deployments/blob/master/.github/workflows/Marketplace_Example.yml) which shows how to use my **Public Marketplace GitHub Actions** instead of reusable workflows. I have put more development effort into the public actions and so they contain more features such as the ability to `Deploy` or `Destroy` Terraform plans.  
