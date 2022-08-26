@@ -21,7 +21,7 @@ az keyvault create `
     --enable-rbac-authorization
 
 # Authorize the operation to create a few secrets - Signed in User (Key Vault Secrets Officer)
-az ad signed-in-user show --query objectId -o tsv | foreach-object {
+az ad signed-in-user show --query id -o tsv | foreach-object {
     az role assignment create `
         --role "Key Vault Secrets Officer" `
         --assignee "$_" `
@@ -39,7 +39,7 @@ az storage account create `
     --min-tls-version "TLS1_2"
 
 # Authorize the operation to create the container - Signed in User (Storage Blob Data Contributor Role)
-az ad signed-in-user show --query objectId -o tsv | foreach-object { 
+az ad signed-in-user show --query id -o tsv | foreach-object { 
     az role assignment create `
         --role "Storage Blob Data Contributor" `
         --assignee "$_" `
