@@ -78,7 +78,7 @@ jobs:
   
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
 
       - name: Scan IaC - tfsec
         if: ${{ inputs.ENABLE_TFSEC == 'true' }}
@@ -93,7 +93,7 @@ jobs:
           sarif_file: tfsec.sarif  
 
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2.0.0
+        uses: hashicorp/setup-terraform@v2.0.2
         with:
           terraform_version: ${{ inputs.tf_version }}
 
