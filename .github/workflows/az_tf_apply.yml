@@ -68,7 +68,7 @@ jobs:
   
     steps:
       - name: Download Artifact
-        uses: actions/download-artifact@v3.0.1
+        uses: actions/download-artifact@v3.0.2
         with:
           name: ${{ inputs.tf_key }}
           path: ${{ inputs.path }}
