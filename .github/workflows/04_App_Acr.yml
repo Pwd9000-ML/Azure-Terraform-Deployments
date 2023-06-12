@@ -10,7 +10,7 @@ jobs:
     environment: null        
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.5.2
+        uses: actions/checkout@v3.5.3
 
       - name: Dev TF Plan Deploy
         uses: Pwd9000-ML/terraform-azurerm-plan@v1.2.5
@@ -59,7 +59,7 @@ jobs:
 #    environment: null        
 #    steps:
 #      - name: Checkout
-#        uses: actions/checkout@v3.5.2
+#        uses: actions/checkout@v3.5.3
 
 #      - name: Dev TF Plan Destroy
 #        uses: Pwd9000-ML/terraform-azurerm-plan@v1.2.5
