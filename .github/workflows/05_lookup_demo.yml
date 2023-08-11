@@ -10,10 +10,10 @@ jobs:
     environment: null        
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v3.5.3
 
       - name: Dev TF Plan Deploy
-        uses: Pwd9000-ML/terraform-azurerm-plan@v1.2.5
+        uses: Pwd9000-ML/terraform-azurerm-plan@v1.2.6
         with:
           path: 05_lookup_demo
           plan_mode: deploy
@@ -38,7 +38,7 @@ jobs:
     steps:
       - name: Dev TF Deploy
         if: ${{ github.actor != 'dependabot[bot]' }}
-        uses: Pwd9000-ML/terraform-azurerm-apply@v1.2.5
+        uses: Pwd9000-ML/terraform-azurerm-apply@v1.2.6
         with:
           plan_mode: deploy
           tf_version: latest
@@ -59,10 +59,10 @@ jobs:
 #    environment: null        
 #    steps:
 #      - name: Checkout
-#        uses: actions/checkout@v3.1.0
+#        uses: actions/checkout@v3.5.3
 
 #      - name: Dev TF Plan Destroy
-#        uses: Pwd9000-ML/terraform-azurerm-plan@v1.2.5
+#        uses: Pwd9000-ML/terraform-azurerm-plan@v1.2.6
 #        with:
 #          path: 05_lookup_demo
 #          plan_mode: destroy
@@ -87,7 +87,7 @@ jobs:
 #    steps:
 #      - name: Dev TF Destroy
 #        if: ${{ github.actor != 'dependabot[bot]' }}
-#        uses: Pwd9000-ML/terraform-azurerm-apply@v1.2.5
+#        uses: Pwd9000-ML/terraform-azurerm-apply@v1.2.6
 #        with:
 #          plan_mode: destroy
 #          tf_version: latest
