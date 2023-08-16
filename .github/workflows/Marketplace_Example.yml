@@ -13,6 +13,10 @@ jobs:
 ##### PLAN A DEPLOYMENT #####
   Plan_Dev_Deploy:
     runs-on: ubuntu-latest
+    permissions:   #Permission is required if enabling TFSEC == true
+      actions: read
+      contents: read
+      security-events: write
     if: ${{ github.actor != 'dependabot[bot]' }}
     environment: null #(Optional) If using GitHub Environments          
     steps:
