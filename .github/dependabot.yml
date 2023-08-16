@@ -11,23 +11,17 @@ updates:
   - package-ecosystem: "terraform" 
     directory: "/01_Foundation"
     schedule:
-      interval: "weekly"
-      day: "sunday"
-      time: "05:00"
+      interval: "monthly"
       timezone: "Europe/London"
 
   - package-ecosystem: "terraform" 
     directory: "/02_Storage"
     schedule:
-      interval: "weekly"
-      day: "sunday"
-      time: "05:00"
+      interval: "monthly"
       timezone: "Europe/London"
 
   - package-ecosystem: "terraform" 
     directory: "/03_etc_etc"
     schedule:
-      interval: "weekly"
-      day: "sunday"
-      time: "05:00"
+      interval: "monthly"
       timezone: "Europe/London"
