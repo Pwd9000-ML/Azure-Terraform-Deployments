@@ -122,7 +122,7 @@ jobs:
         run: zip -r ${{ inputs.tf_key }}.zip ./*
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4.3.4
+        uses: actions/upload-artifact@v4.4.0
         with:
           name: "${{ inputs.tf_key }}"
           path: "${{ inputs.path }}/${{ inputs.tf_key }}.zip"
