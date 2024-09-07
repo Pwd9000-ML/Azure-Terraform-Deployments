@@ -11,14 +11,13 @@ variable "location" {
 
 variable "storage_config" {
   type = list(object({
-    name                      = string
-    account_kind              = string
-    account_tier              = string
-    account_replication_type  = string
-    access_tier               = string
-    enable_https_traffic_only = bool
-    min_tls_version           = string
-    is_hns_enabled            = bool
+    name                     = string
+    account_kind             = string
+    account_tier             = string
+    account_replication_type = string
+    access_tier              = string
+    min_tls_version          = string
+    is_hns_enabled           = bool
   }))
 }
 

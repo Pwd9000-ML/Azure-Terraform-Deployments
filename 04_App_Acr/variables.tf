@@ -23,8 +23,8 @@ variable "vnet_address_space" {
 
 variable "vnet_subnets" {
   type = list(object({
-    name           = string
-    address_prefix = string
+    name             = string
+    address_prefixes = list(string)
   }))
   description = "Specifies a list of subnet objects of the virtual network that will be created."
   default     = []

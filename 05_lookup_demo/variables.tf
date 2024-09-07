@@ -6,14 +6,13 @@ variable "site_names" {
 
 variable "storage_config" {
   type = list(object({
-    name                      = string
-    account_kind              = string
-    account_tier              = string
-    account_replication_type  = string
-    access_tier               = string
-    enable_https_traffic_only = bool
-    is_hns_enabled            = bool
-    site_name                 = string
+    name                     = string
+    account_kind             = string
+    account_tier             = string
+    account_replication_type = string
+    access_tier              = string
+    is_hns_enabled           = bool
+    site_name                = string
   }))
   default     = []
   description = "Provide a list of Storage Configs"

@@ -34,8 +34,7 @@ resource "azurerm_linux_web_app" "APPSVC" {
     container_registry_use_managed_identity = true
     ftps_state                              = "FtpsOnly"
     application_stack {
-      docker_image     = "${var.acr_name}.azurecr.io/${var.appsvc_name}"
-      docker_image_tag = "latest"
+      docker_image_name = "${var.acr_name}.azurecr.io/${var.appsvc_name}:latest"
     }
     vnet_route_all_enabled = var.vnet_route_all_enabled
   }
