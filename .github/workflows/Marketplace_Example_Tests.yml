@@ -23,7 +23,7 @@ jobs:
     if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v4.2.0
 
       - name: Run Dependency Tests - Plan AND Apply AND Destroy
         uses: Pwd9000-ML/terraform-azurerm-tests@v1.1.0
