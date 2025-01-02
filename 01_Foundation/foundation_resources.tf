@@ -30,7 +30,7 @@ locals {
 # Use the import block to declare the existing role assignments to import
 import {
   for_each = toset(local.role_assignments)
-  to       = azurerm_role_assignment.rbac[each.key]
+  to       = azurerm_role_assignment.rbac
   id       = each.value
 }
 
