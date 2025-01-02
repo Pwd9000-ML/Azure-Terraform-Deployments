@@ -28,6 +28,8 @@ resource "null_resource" "rbac" {
 
   provisioner "local-exec" {
     command = <<EOT
+      az login --service-principal --username $ARM_CLIENT_ID --password $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID --output none
+      az account set --subscription $ARM_SUBSCRIPTION_ID --output none
       az role assignment create --assignee ${azurerm_user_assigned_identity.uai.principal_id} --role ${each.key} --scope ${azurerm_resource_group.rg.id}
     EOT
   }
