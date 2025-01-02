@@ -27,7 +27,7 @@ locals {
   }
 }
 
-# Use the import block to declare the existing role assignments to import
+# Use the import block to declare the existing role assignments to import 
 import {
   for_each = local.role_assignments
   to       = azurerm_role_assignment.rbac[each.key]
