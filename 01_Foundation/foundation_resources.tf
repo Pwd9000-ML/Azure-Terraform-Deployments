@@ -27,6 +27,12 @@ locals {
   }
 }
 
+import {
+  for_each = local.role_assignments
+  to       = azurerm_role_assignment.rbac[each.key]
+  id       = each.value
+}
+
 # Create the azurerm_role_assignment resource importing the existing role assignments
 resource "azurerm_role_assignment" "rbac" {
   for_each             = local.role_assignments
