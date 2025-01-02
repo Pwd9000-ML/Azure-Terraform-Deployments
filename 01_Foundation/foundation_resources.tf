@@ -20,25 +20,23 @@ resource "azurerm_user_assigned_identity" "uai" {
 }
 
 # Create a list of the existing role assignment IDs to import using local variables
-locals {
-  role_assignments = {
-    Contributor = "/subscriptions/829efd7e-aa80-4c0d-9c1c-7aa2557f8e07/resourceGroups/Demo-Inf-Dev-Rg/providers/Microsoft.Authorization/roleAssignments/1a533459-6925-4770-9c4e-0d341ae69691",
-    Reader      = "/subscriptions/829efd7e-aa80-4c0d-9c1c-7aa2557f8e07/resourceGroups/Demo-Inf-Dev-Rg/providers/Microsoft.Authorization/roleAssignments/38e0ac0b-8342-40d9-ba29-7bfc16de6352"
-  }
-}
+#locals {
+#  role_assignments = {
+#    Contributor = "/subscriptions/829efd7e-aa80-4c0d-9c1c-7aa2557f8e07/resourceGroups/Demo-Inf-Dev-Rg/providers/Microsoft.Authorization/roleAssignments/1a533459-6925-4770-9c4e-0d341ae69691",
+#    Reader      = "/subscriptions/829efd7e-aa80-4c0d-9c1c-7aa2557f8e07/resourceGroups/Demo-Inf-Dev-Rg/providers/Microsoft.Authorization/roleAssignments/38e0ac0b-8342-40d9-ba29-7bfc16de6352"
+#  }
+#}
 
 # Use the import block to declare the existing role assignments to import 
 import {
-  for_each = local.role_assignments
-  to       = azurerm_role_assignment.rbac[each.key]
-  id       = each.value
+  to = azurerm_role_assignment.rbac
+  id = "/subscriptions/829efd7e-aa80-4c0d-9c1c-7aa2557f8e07/resourceGroups/Demo-Inf-Dev-Rg/providers/Microsoft.Authorization/roleAssignments/1a533459-6925-4770-9c4e-0d341ae69691"
 }
 
 # Create the azurerm_role_assignment resource importing the existing role assignments
 resource "azurerm_role_assignment" "rbac" {
-  for_each             = local.role_assignments
   principal_id         = azurerm_user_assigned_identity.uai.principal_id
-  role_definition_name = each.key
+  role_definition_name = "Contributor"
   scope                = azurerm_resource_group.rg.id
   #import {
   #  id = each.value
