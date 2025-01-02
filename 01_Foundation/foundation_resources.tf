@@ -19,21 +19,22 @@ resource "azurerm_user_assigned_identity" "uai" {
   resource_group_name = azurerm_resource_group.rg.name
 }
 
-# Check if the role assignment already exists with 'for_each' on  'data' resource
-data "azurerm_role_assignments" "rbac" {
-  for_each             = toset(["Contributor", "Reader"])
-  principal_id         = azurerm_user_assigned_identity.uai.principal_id
-  role_definition_name = each.value
-  scope                = azurerm_resource_group.rg.id
+# Check if the role assignment already exists with 'for_each' on 'azurerm_role_assignment' resource
+resource "azurerm_role_assignment" "existing_rbac" {
+  for_each                         = toset(["Contributor", "Reader"])
+  principal_id                     = azurerm_user_assigned_identity.uai.principal_id
+  role_definition_name             = each.value
+  scope                            = azurerm_resource_group.rg.id
+  skip_service_principal_aad_check = true
 }
 
 # Only create role assignments for the role definitions that do not exist in the data resource check and skip the ones that already exist in the data resource check
-resource "azurerm_role_assignment" "rbac" {
-  for_each             = { for role in toset(["Contributor", "Reader"]) : role => role if data.azurerm_role_assignments.rbac[role] == null }
-  principal_id         = azurerm_user_assigned_identity.uai.principal_id
-  role_definition_name = each.value
-  scope                = azurerm_resource_group.rg.id
-}
+#resource "azurerm_role_assignment" "rbac" {
+#  for_each             = { for role in toset(["Contributor", "Reader"]) : role => role if data.azurerm_role_assignments.rbac[role] == null }
+#  principal_id         = azurerm_user_assigned_identity.uai.principal_id
+#  role_definition_name = each.value
+#  scope                = azurerm_resource_group.rg.id
+#}
 
 #Create a Key Vault for the Resource Group
 resource "azurerm_key_vault" "kv" {
