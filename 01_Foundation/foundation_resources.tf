@@ -29,8 +29,7 @@ data "azurerm_role_assignments" "rbac" {
 
 # Only create role assignments for the role definitions that do not exist in the data resource check and skip the ones that already exist in the data resource check
 resource "azurerm_role_assignment" "rbac" {
-  for_each             = toset(["Contributor", "Reader"])
-  count                = data.azurerm_role_assignments.rbac[each.value] == null ? 1 : 0
+  for_each = { for role in toset(["Contributor", "Reader"]) : role => role if data.azurerm_role_assignments.rbac[role] == null }
   principal_id         = azurerm_user_assigned_identity.uai.principal_id
   role_definition_name = each.value
   scope                = azurerm_resource_group.rg.id
