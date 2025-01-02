@@ -12,11 +12,6 @@ resource "azurerm_resource_group" "rg" {
   tags     = var.tags
 }
 
-#Create a test error
-data "azurerm_client_config" "current" {
-  // No additional configuration is required
-}
-
 resource "azurerm_role_assignment" "example" {
   count                = 2
   principal_id         = data.azurerm_client_config.current.object_id
