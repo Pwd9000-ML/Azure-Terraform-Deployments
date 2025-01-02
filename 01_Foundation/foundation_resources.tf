@@ -28,11 +28,11 @@ locals {
 }
 
 # Use the import block to declare the existing role assignments to import
-#import {
-#  for_each = toset(local.role_assignments)
-#  to       = azurerm_role_assignment.rbac
-#  id       = each.value
-#}
+import {
+  for_each = local.role_assignments
+  to       = azurerm_role_assignment.rbac[each.key]
+  id       = each.value
+}
 
 # Create the azurerm_role_assignment resource importing the existing role assignments
 resource "azurerm_role_assignment" "rbac" {
@@ -40,9 +40,9 @@ resource "azurerm_role_assignment" "rbac" {
   principal_id         = azurerm_user_assigned_identity.uai.principal_id
   role_definition_name = each.key
   scope                = azurerm_resource_group.rg.id
-  import {
-    id = each.value
-  }
+  #import {
+  #  id = each.value
+  #}
 }
 
 
