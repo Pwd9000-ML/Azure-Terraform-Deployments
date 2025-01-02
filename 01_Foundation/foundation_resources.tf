@@ -12,6 +12,18 @@ resource "azurerm_resource_group" "rg" {
   tags     = var.tags
 }
 
+#Create a test error
+data "azurerm_client_config" "current" {
+  // No additional configuration is required
+}
+
+resource "azurerm_role_assignment" "example" {
+  count                = 2
+  principal_id         = data.azurerm_client_config.current.object_id
+  role_definition_name = "Contributor"
+  scope                = azurerm_resource_group.rg.id
+}
+
 #Create a Key Vault for the Resource Group
 resource "azurerm_key_vault" "kv" {
   name                        = "${lower(var.key_vault_name)}${random_integer.kv_num.result}"
