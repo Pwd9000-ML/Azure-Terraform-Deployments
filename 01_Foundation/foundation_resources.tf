@@ -6,7 +6,7 @@ data "azurerm_client_config" "current" {}
 ##################################################
 
 # Check if the resource group already exists with 'data' resource
-data "azurerm_resource_group" "rg" {
+data "azurerm_resource_group" "rg_existing" {
   name = "Demo-Inf-Dev-Rg-720"
 }
 
@@ -25,8 +25,8 @@ resource "azurerm_resource_group" "rg" {
 # Create storage account and reference the correct RG
 resource "azurerm_storage_account" "sa" {
   name                     = "demoinfdevsa720"
-  resource_group_name      = coalesce(try(data.azurerm_resource_group.rg.name, null), try(azurerm_resource_group.rg["Demo-Inf-Dev-Rg-720"].name, null))
-  location                 = coalesce(try(data.azurerm_resource_group.rg.location, null), try(azurerm_resource_group.rg["Demo-Inf-Dev-Rg-720"].location, null))
+  resource_group_name      = coalesce(try(data.azurerm_resource_group.rg_existing.name, null), try(azurerm_resource_group.rg["Demo-Inf-Dev-Rg-720"].name, null))
+  location                 = coalesce(try(data.azurerm_resource_group.rg_existing.location, null), try(azurerm_resource_group.rg["Demo-Inf-Dev-Rg-720"].location, null))
   account_tier             = "Standard"
   account_replication_type = "LRS"
 
