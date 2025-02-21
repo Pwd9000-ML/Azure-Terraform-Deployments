@@ -5,34 +5,38 @@ data "azurerm_client_config" "current" {}
 # FOUNDATIONAL RESOURCES                         #
 ##################################################
 
-# Check if the resource group already exists with 'data' resource
+# Check if the resource group already exists
 data "azurerm_resource_group" "rg_existing" {
   name = "Demo-Inf-Dev-Rg-720"
 }
 
-# Determine whether to create the resource group using terraform or use the existing resource group ID if it exists
+# Determine whether the resource group exists
 locals {
-  create_rg = can(data.azurerm_resource_group.rg_existing.id) ? toset([]) : toset(["Demo-Inf-Dev-Rg-720"])
+  rg_exists = can(data.azurerm_resource_group.rg_existing.id) # Returns true if RG exists
 }
 
-# Only create the resource group if it does not exist otherwise use the existing resource group ID
+# Only create the resource group if it does not exist
 resource "azurerm_resource_group" "rg" {
-  for_each = local.create_rg
-  name     = each.key
+  count    = local.rg_exists ? 0 : 1
+  name     = "Demo-Inf-Dev-Rg-720"
   location = "East US"
 }
 
-# Create storage account and reference the correct RG
+# Create the storage account and reference the correct RG
 resource "azurerm_storage_account" "sa" {
-  name                     = "demoinfdevsa720"
-  resource_group_name      = coalesce(try(data.azurerm_resource_group.rg_existing.name, null), try(azurerm_resource_group.rg["Demo-Inf-Dev-Rg-720"].name, null))
-  location                 = coalesce(try(data.azurerm_resource_group.rg_existing.location, null), try(azurerm_resource_group.rg["Demo-Inf-Dev-Rg-720"].location, null))
+  name = "demoinfdevsa720"
+
+  # Use existing RG from data source if available, otherwise use the newly created RG
+  resource_group_name = local.rg_exists ? data.azurerm_resource_group.rg_existing.name : azurerm_resource_group.rg[0].name
+  location            = local.rg_exists ? data.azurerm_resource_group.rg_existing.location : azurerm_resource_group.rg[0].location
+
   account_tier             = "Standard"
   account_replication_type = "LRS"
 
-  # Explicit dependency to ensure RG exists before SA is created
+  # Ensure Terraform waits for RG creation if needed
   depends_on = [azurerm_resource_group.rg]
 }
+
 
 
 # #Create a Resource Group
