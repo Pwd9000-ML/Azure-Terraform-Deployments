@@ -16,11 +16,16 @@ resource "terraform_data" "rg_existing" {
   }
 }
 
+output "rg_existing" {
+  value = terraform_data.rg_existing.output
+}
+
 # Only create the resource group if it does not exist
 resource "azurerm_resource_group" "rg" {
-  count    = terraform_data.rg_existing.output == "" ? 1 : 0
-  name     = "Demo-Inf-Dev-Rg-720"
-  location = "UKSouth"
+  count      = terraform_data.rg_existing.output == "" ? 1 : 0
+  name       = "Demo-Inf-Dev-Rg-720"
+  location   = "UKSouth"
+  depends_on = [terraform_data.rg_existing]
 }
 
 # Create the storage account in the resource group
