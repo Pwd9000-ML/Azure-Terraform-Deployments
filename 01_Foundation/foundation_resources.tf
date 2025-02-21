@@ -20,8 +20,8 @@ resource "azurerm_resource_group" "rg" {
 # Create other resources that depend on the resource group 
 resource "azurerm_storage_account" "sa" {
   name                     = "demoinfdevsa720"
-  resource_group_name      = azurerm_resource_group.rg["Demo-Inf-Dev-Rg-720"].name
-  location                 = azurerm_resource_group.rg["Demo-Inf-Dev-Rg-720"].location
+  resource_group_name      = azurerm_resource_group.rg.name
+  location                 = azurerm_resource_group.rg.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }
