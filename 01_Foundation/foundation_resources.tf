@@ -7,7 +7,7 @@ data "azurerm_client_config" "current" {}
 
 # Try to fetch the existing resource group
 data "azurerm_resource_group" "rg_existing" {
-  name = var.rg_name
+  name = "Demo-Inf-Dev-Rg-720"
 }
 
 # Output whether the RG exists
