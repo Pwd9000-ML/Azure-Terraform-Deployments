@@ -7,7 +7,7 @@ data "azurerm_client_config" "current" {}
 
 # Check if the resource group already exists with 'terraform_data' resource
 resource "terraform_data" "rg_existing" {
-  input = "Demo-Inf-Dev-Rg-720"
+  input            = "Demo-Inf-Dev-Rg-720"
   triggers_replace = timestamp()
 
   provisioner "local-exec" {
