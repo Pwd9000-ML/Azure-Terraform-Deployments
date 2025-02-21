@@ -15,6 +15,10 @@ resource "terraform_data" "rg_existing" {
   }
 }
 
+output "terraform_data_rg_existing" {
+  value = terraform_data.rg_existing.result  
+}
+
 # Only create the resource group if it does not exist
 resource "azurerm_resource_group" "rg" {
   count    = terraform_data.rg_existing.result == "" ? 1 : 0
