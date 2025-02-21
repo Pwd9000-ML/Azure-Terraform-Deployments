@@ -22,14 +22,16 @@ resource "azurerm_resource_group" "rg" {
   location = "East US"
 }
 
-# Create other resources that depend on the resource group 
+# Create storage account and reference the correct RG
 resource "azurerm_storage_account" "sa" {
-  for_each                 = local.create_rg
   name                     = "demoinfdevsa720"
   resource_group_name      = coalesce(try(data.azurerm_resource_group.rg.name, null), try(azurerm_resource_group.rg["Demo-Inf-Dev-Rg-720"].name, null))
   location                 = coalesce(try(data.azurerm_resource_group.rg.location, null), try(azurerm_resource_group.rg["Demo-Inf-Dev-Rg-720"].location, null))
   account_tier             = "Standard"
   account_replication_type = "LRS"
+
+  # Explicit dependency to ensure RG exists before SA is created
+  depends_on = [azurerm_resource_group.rg]
 }
 
 
