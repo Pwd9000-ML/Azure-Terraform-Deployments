@@ -8,18 +8,11 @@ data "azurerm_client_config" "current" {}
 # Check if the resource group already exists with 'data' resource
 data "azurerm_resource_group" "rg" {
   name = "Demo-Inf-Dev-Rg-720"
-
-  lifecycle {
-    postcondition {
-      condition     = can(self.id) # Ensure Terraform does not fail if it cannot find the RG
-      error_message = "Resource Group not found. Terraform will proceed to create it."
-    }
-  }
 }
 
 # Determine whether to create the resource group using terraform or use the existing resource group ID if it exists
 locals {
-  create_rg = length(try(data.azurerm_resource_group.rg.id, "")) == 0 ? toset(["Demo-Inf-Dev-Rg-720"]) : toset([])
+  create_rg = can(data.azurerm_resource_group.rg_existing.id) ? toset([]) : toset(["Demo-Inf-Dev-Rg-720"])
 }
 
 # Only create the resource group if it does not exist otherwise use the existing resource group ID
