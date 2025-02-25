@@ -7,7 +7,7 @@ data "azurerm_client_config" "current" {}
 
 # run verify module to test the resource group
 module "verify" {
-  source              = "./modules/verify"
+  source              = "./verify/rg"
   resource_group_name = "Demo-Inf-Dev-Rg-720"
 }
 
