@@ -14,8 +14,9 @@ module "verify" {
 # run create module to create the resource group if it does not exist based on the verify module output
 module "create" {
   source = "./create"
-  # only create the resource group if verify module output returns != var.resource_group_name
-  resource_group_name = module.verify.rg_exists ? "Demo-Inf-Dev-Rg-720" : ""
+
+  count               = module.verify.rg_exists != "true" ? 1 : 0
+  resource_group_name = "Demo-Inf-Dev-Rg-720"
   location            = "UKSouth"
 }
 
