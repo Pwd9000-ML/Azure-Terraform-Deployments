@@ -11,18 +11,13 @@ module "verify" {
   resource_group_name = "Demo-Inf-Dev-Rg-720"
 }
 
-# Define a local value to store the result of the verification
-locals {
-  rg_exists = module.verify.rg_exists != "Demo-Inf-Dev-Rg-720"
+# run create module to create the resource group if it does not exist based on the verify module output
+module "create" {
+  source = "./create"
+  # only create the resource group if verify module output returns != var.resource_group_name
+  resource_group_name = module.verify.rg_exists ? "Demo-Inf-Dev-Rg-720" : ""
+  location            = "UKSouth"
 }
-
-# Only create the resource group if verify module output returns != var.resource_group_name
-resource "azurerm_resource_group" "rg" {
-  count    = local.rg_exists ? 1 : 0
-  name     = var.resource_group_name
-  location = var.location
-}
-
 
 # # Create the storage account in the resource group
 # resource "azurerm_storage_account" "sa" {
