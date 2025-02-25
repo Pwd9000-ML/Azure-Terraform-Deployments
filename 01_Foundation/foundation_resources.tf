@@ -28,7 +28,7 @@ resource "terraform_data" "rg_check" {
 
 output "rg_id_output" {
   description = "The ID of the resource group that was created or already existed"
-  value       = terraform_data.rg_existing.output
+  value       = terraform_data.rg_check.output
 }
 
 # # The verification test will return the resource ID regardless of whether the resource group was created or already existed
