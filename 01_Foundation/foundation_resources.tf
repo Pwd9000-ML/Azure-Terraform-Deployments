@@ -11,9 +11,14 @@ module "verify" {
   resource_group_name = "Demo-Inf-Dev-Rg-720"
 }
 
+# Define a local value to store the result of the verification
+locals {
+  rg_exists = module.verify.rg_exists != "Demo-Inf-Dev-Rg-720"
+}
+
 # Only create the resource group if verify module output returns != var.resource_group_name
 resource "azurerm_resource_group" "rg" {
-  count    = module.verify.rg_exists != "Demo-Inf-Dev-Rg-720" ? 1 : 0
+  count    = local.rg_exists ? 1 : 0
   name     = var.resource_group_name
   location = var.location
 }
