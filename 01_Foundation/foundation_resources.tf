@@ -5,19 +5,6 @@ data "azurerm_client_config" "current" {}
 # FOUNDATIONAL RESOURCES                         #
 ##################################################
 
-# Declare variables to verify if RG exists
-variable "resource_group_name" {
-  description = "The name of the resource group to verify"
-  type        = string
-  default     = ""
-}
-
-variable "location" {
-  description = "The location of the resource group"
-  type        = string
-  default     = "UKSouth"
-}
-
 # Check if the resource group already exists with 'terraform_data' resource
 resource "terraform_data" "rg_check" {
   input            = var.resource_group_name
