@@ -7,13 +7,13 @@ data "azurerm_client_config" "current" {}
 
 # run verify module to test the resource group
 module "verify" {
-  source              = "./verify/rg"
+  source              = "./verify"
   resource_group_name = "Demo-Inf-Dev-Rg-720"
 }
 
-# Only create the resource group if verify module output returns == var.resource_group_name
+# Only create the resource group if verify module output returns != var.resource_group_name
 resource "azurerm_resource_group" "rg" {
-  count    = module.verify.rg_exists == "Demo-Inf-Dev-Rg-720" ? 1 : 0
+  count    = module.verify.rg_exists != "Demo-Inf-Dev-Rg-720" ? 1 : 0
   name     = var.resource_group_name
   location = var.location
 }
