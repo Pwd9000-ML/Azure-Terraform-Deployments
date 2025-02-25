@@ -5,28 +5,19 @@ data "azurerm_client_config" "current" {}
 # FOUNDATIONAL RESOURCES                         #
 ##################################################
 
-# Check if the resource group already exists with 'terraform_data' resource
-resource "terraform_data" "rg_existing" {
-  input            = "Demo-Inf-Dev-Rg-720"
-  triggers_replace = timestamp()
-
-  provisioner "local-exec" {
-    # Use the Azure CLI to check if the resource group exists
-    command = "az group show --name 'Demo-Inf-Dev-Rg-720' --query id"
-  }
+# run verify module to test the resource group
+module "verify" {
+  source              = "./modules/verify"
+  resource_group_name = "Demo-Inf-Dev-Rg-720"
 }
 
-output "rg_existing" {
-  value = terraform_data.rg_existing.output
+# Only create the resource group if verify module output returns == var.resource_group_name
+resource "azurerm_resource_group" "rg" {
+  count    = module.verify.rg_exists == "Demo-Inf-Dev-Rg-720" ? 1 : 0
+  name     = var.resource_group_name
+  location = var.location
 }
 
-# # Only create the resource group if it does not exist
-# resource "azurerm_resource_group" "rg" {
-#   count      = terraform_data.rg_existing.output == "" ? 1 : 0
-#   name       = "Demo-Inf-Dev-Rg-720"
-#   location   = "UKSouth"
-#   depends_on = [terraform_data.rg_existing]
-# }
 
 # # Create the storage account in the resource group
 # resource "azurerm_storage_account" "sa" {
