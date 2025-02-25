@@ -18,6 +18,8 @@ module "create" {
   count               = module.verify.rg_exists != "true" ? 1 : 0
   resource_group_name = "Demo-Inf-Dev-Rg-720"
   location            = "UKSouth"
+
+  depends_on = [ module.verify ]
 }
 
 # # Create the storage account in the resource group
