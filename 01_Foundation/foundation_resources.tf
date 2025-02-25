@@ -5,21 +5,23 @@ data "azurerm_client_config" "current" {}
 # FOUNDATIONAL RESOURCES                         #
 ##################################################
 
-# run verify module to test the resource group
+# run verify module to test if the the resource group exists and create if not return the resource ID
 module "verify" {
   source              = "./verify"
   resource_group_name = "Demo-Inf-Dev-Rg-720"
+  location            = "UKSouth"
 }
 
-# run create module to create the resource group if it does not exist based on the verify module output
-module "create" {
-  source = "./create"
+# The verification test will return the resource ID regardless of whether the resource group was created or already existed
+import {
+  to = azurerm_resource_group.rg
+  id = module.verify.rg_id_output
+}
 
-  count               = module.verify.rg_exists != "true" ? 1 : 0
-  resource_group_name = "Demo-Inf-Dev-Rg-720"
-  location            = "UKSouth"
-
-  depends_on = [module.verify]
+# Resource Group block is required to import the resource group ID from the verify module
+resource "azurerm_resource_group" "rg" {
+  name     = "Demo-Inf-Dev-Rg-720"
+  location = "UKSouth"
 }
 
 # # Create the storage account in the resource group
