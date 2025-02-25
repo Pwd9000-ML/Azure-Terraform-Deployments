@@ -11,8 +11,9 @@ resource "terraform_data" "rg_check" {
   triggers_replace = timestamp()
 
   provisioner "local-exec" {
-    # Use the Azure CLI to check if the resource group exists adn create if not
-    command = <<EOT
+    # Use the Azure CLI with PowerShell Core to check if the resource group exists adn create if not
+    interpreter = ["pwsh", "-Command"]
+    command     = <<EOT
       $ErrorActionPreference = "Stop"
       az login --service-principal --username $env:ARM_CLIENT_ID --password $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID --output none
       az account set --subscription $env:ARM_SUBSCRIPTION_ID --output none
