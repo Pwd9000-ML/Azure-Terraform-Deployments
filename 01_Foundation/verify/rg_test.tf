@@ -13,9 +13,15 @@ resource "terraform_data" "rg_existing" {
   provisioner "local-exec" {
     # Use the Azure CLI to check if the resource group exists
     command = <<EOT
-      az login --service-principal --username $ARM_CLIENT_ID --password $ARM_CLIENT_SECRET --tenant $ARM_TENANT_ID --output none
-      az account set --subscription $ARM_SUBSCRIPTION_ID --output none
-      az group show --name ${var.resource_group_name} --query name --output tsv
+      $ErrorActionPreference = "Stop"
+      az login --service-principal --username $env:ARM_CLIENT_ID --password $env:ARM_CLIENT_SECRET --tenant $env:ARM_TENANT_ID --output none
+      az account set --subscription $env:ARM_SUBSCRIPTION_ID --output none
+      $rg = az group show --name ${var.resource_group_name} --query name --output tsv
+      if ($rg) {
+        Write-Output "true"
+      } else {
+        Write-Output "false"
+      }
     EOT
   }
 }
