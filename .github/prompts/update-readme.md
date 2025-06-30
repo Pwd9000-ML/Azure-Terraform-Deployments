@@ -1,5 +1,5 @@
 ---
-mode: 'agent'
+mode: 'edit'
 tools: ['fetch', 'codebase']
 description: 'Update the documentation README.md file with new changes.'
 ---

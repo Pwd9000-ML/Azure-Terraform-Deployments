@@ -1,5 +1,5 @@
 ---
-mode: 'edit'
+mode: 'ask'
 description: 'Perform a Terraform security and code quality review on the provided code.'
 tools: ['*']
 ---
