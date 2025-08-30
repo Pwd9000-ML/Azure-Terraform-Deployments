@@ -1,7 +1,7 @@
 ---
 mode: 'ask'
 description: 'Perform a Terraform security and code quality review on the provided code.'
-tools: ['*']
+tools: ['codebase']
 ---
 Perform a Terraform security and code quality review:
 
