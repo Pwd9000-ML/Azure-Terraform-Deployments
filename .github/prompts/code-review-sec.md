@@ -8,4 +8,4 @@ Perform a Terraform security and code quality review:
 
 * Check the provided Terraform code for security best practices by running 'tfsec' in the CLI command on the codebase for code security issues.
 * Validate all user inputs and sanitize data.
-* For any critical security issues create a github issue on my repo with the title prefixed 🚨 [CRITICAL SECURITY].
+* For any critical security issues create a github issue on this projects repo on github.com with the issue title prefixed 🚨 [CRITICAL SECURITY].
